@@ -1,0 +1,8 @@
+.Main{
+  border: solid black 1px;
+}
+
+.App__main{
+  margin: 0 auto;
+  max-width: 1280px;
+}
