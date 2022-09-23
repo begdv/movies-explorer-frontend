@@ -1,0 +1,46 @@
+.MEProfileButton{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 3px 3px 3px 10px;
+  background: #FAFAFA;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  border-radius: 40px;
+  width: 100px;
+}
+
+.MEProfileButton_type_header{
+  margin-left: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .MEProfileButton_type_header{
+    display: none;
+  }
+}
+
+.MEProfileButton__title{
+  color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 12px;
+}
+
+.MEProfileButton__logo{
+  width: 24px;
+  height: 24px;
+  padding: 7.5px;
+  box-sizing: border-box;
+  background: #F4F4F4;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+}
+
+.MEProfileButton:hover{
+  opacity: 0.8;
+}

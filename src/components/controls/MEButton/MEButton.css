@@ -1,0 +1,13 @@
+.MEButton{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  background: #3456F3;
+  border-radius: 3px;
+  color: #FFFFFF;
+}
+
+.MEButton:hover{
+  opacity: 0.8;
+}
+

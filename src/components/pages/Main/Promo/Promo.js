@@ -1,20 +1,19 @@
-import Header from "../../common/Header/Header";
+import Header from "../../../common/Header/Header";
 
-import './Profile.css';
+import './Promo.css';
 
-function Profile(props) {
+function Promo(props) {
   const {
     onMenuPopup: handleMenuPopup,
   } = props;
   return (
-    <div className="Profile">
+    <div className="Promo">
       <Header
         isLoggedIn={true}
         onMenuPopup={handleMenuPopup}
       />
-      Profile
     </div>
   );
 }
 
-export default Profile;
+export default Promo;

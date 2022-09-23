@@ -1,0 +1,33 @@
+.MELinkButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  background: #3456F3;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.MELinkButton:hover{
+  opacity: 0.8;
+}
+
+.MELinkButton_type_header{
+  font-size: 12px;
+  line-height: 16px;
+  padding: 8px 20px;
+  width: 76px;
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 320px) {
+  .MELinkButton_type_header{
+    width: 54px;
+    font-size: 10px;
+    margin-left: 26px;
+  }
+}

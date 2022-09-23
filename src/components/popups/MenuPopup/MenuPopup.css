@@ -1,0 +1,32 @@
+.MenuPopup{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: calc(100vh * 159 / 1552);
+  padding-bottom: calc(100vh * 90 / 1552);
+  height: 100%;
+}
+
+@media screen and (max-width: 320px) {
+  .MenuPopup{
+    padding-top: calc(100vh * 144 / 780);
+    padding-bottom: calc(100vh * 46 / 780);
+    padding-top: 144px;
+    padding-bottom: 46px;
+  }
+}
+
+.MenuPopup__navlinks{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.MenuPopup__navlink{
+  padding-bottom: 28px;
+}

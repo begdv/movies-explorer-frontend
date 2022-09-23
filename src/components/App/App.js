@@ -1,5 +1,5 @@
-//import logo from '../images/logo.svg';
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import React from 'react';
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Main from "../pages/Main/Main";
@@ -9,19 +9,66 @@ import Profile from "../pages/Profile/Profile";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import NotFound from "../pages/NotFound/NotFound";
+import MenuPopup from "../popups/MenuPopup/MenuPopup";
 
 function App() {
+  const [isMenuPopupOpen, setIsMenuPopupOpen] = React.useState(false);
+  const handleMenuPopup = () => {
+    setIsMenuPopupOpen(true);
+  }
+  const closePopups = () => {
+    setIsMenuPopupOpen(false);
+  }
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/" element={<Main />} />
-        <Route path="movies" element={<Movies />} />
-        <Route path="saved-movies" element={<SavedMovies />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="signin" element={<Login />} />
-        <Route path="signup" element={<Register />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <Main onMenuPopup={handleMenuPopup}/>
+          }
+        />
+        <Route
+          path="movies"
+          element={
+            <Movies onMenuPopup={handleMenuPopup}/>
+          }
+        />
+        <Route
+          path="saved-movies"
+          element={
+            <SavedMovies onMenuPopup={handleMenuPopup}/>
+          }
+        />
+        <Route
+          path="profile"
+          element={
+            <Profile onMenuPopup={handleMenuPopup}/>
+          }
+        />
+        <Route
+          path="signin"
+          element={
+            <Login />
+          }
+        />
+        <Route
+          path="signup"
+          element={
+            <Register />
+          } />
+        <Route
+          path="*"
+          element={
+            <NotFound />
+          }
+        />
       </Routes>
+      <MenuPopup
+        isOpen={isMenuPopupOpen}
+        onClose={closePopups}
+      />
     </div>
   );
 }

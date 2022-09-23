@@ -1,0 +1,35 @@
+.Header{
+  margin: 0;
+  display: flex;
+  padding: 18px 70px;
+  align-items: center;
+}
+
+.Header__navlinks{
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Header__navlink{
+  padding-right: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .Header{
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .Header{
+    padding: 18px 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Header_desktop{
+    display: none;
+  }
+}

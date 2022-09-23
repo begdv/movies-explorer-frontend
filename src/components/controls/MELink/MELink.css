@@ -1,0 +1,24 @@
+.MELink{
+  display: inline-block;
+  color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.MELink:hover{
+  opacity: 0.7;
+}
+
+.MELink_type_header{
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@media screen and (max-width: 320px) {
+  .MELinkButton_type_header{
+    margin-left: 26px;
+    font-size: 10px;
+  }
+}

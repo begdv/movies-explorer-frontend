@@ -1,9 +1,14 @@
 import './Main.css';
 
-function Main() {
+import Promo from "./Promo/Promo";
+
+function Main(props) {
+  const {
+    onMenuPopup: handleMenuPopup,
+  } = props;
   return (
     <div className="Main App__main">
-      Main
+      <Promo onMenuPopup={handleMenuPopup}/>
     </div>
   );
 }

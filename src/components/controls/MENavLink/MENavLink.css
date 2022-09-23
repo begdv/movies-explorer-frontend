@@ -1,0 +1,39 @@
+.MENavLink{
+  display: inline-block;
+  color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.MENavLink:hover{
+  font-weight: 500;
+}
+
+.MENavLink.active{
+  font-weight: 500;
+}
+
+.MENavLink_type_header{
+  font-size: 13px;
+  line-height: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .MENavLink_type_header{
+    display: none;
+  }
+  .MENavLink:hover{
+    text-decoration: underline;
+  }
+  .MENavLink.active{
+    text-decoration: underline;
+  }
+}
+
+.MENavLink_type_popup{
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+}
