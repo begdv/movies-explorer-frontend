@@ -6,7 +6,12 @@ import './MELinkButton.css';
 function MELinkButton(props) {
   const {className, to, title} = props;
   return (
-    <Link className={clsx('MELinkButton', className)} to={to}>{title}</Link>
+    <Link
+      className={clsx('MELinkButton', className)}
+      to={to}
+    >
+      {title}
+    </Link>
   );
 }
 

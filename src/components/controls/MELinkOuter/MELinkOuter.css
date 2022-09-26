@@ -1,0 +1,23 @@
+.MELinkOuter{
+  display: inline-block;
+  color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.MELinkOuter:hover{
+  opacity: 0.7;
+}
+
+.MELinkOuter_type_landing{
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: auto;
+}
+
+.MELinkOuter_type_footer{
+  font-size: 13px;
+  line-height: 16px;
+}

@@ -8,6 +8,7 @@ function MEMenuPopupButton(props) {
   } = props;
   return (
     <button
+      type="button"
       className="MEMenuPopupButton"
       onClick={handleMenuPopupButtonClick}
     >

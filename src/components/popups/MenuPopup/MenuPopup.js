@@ -10,7 +10,6 @@ function MenuPopup(props) {
     isOpen,
     onClose: handleClosePopupClick,
   } = props;
-  console.log(isOpen);
   return (
     <Popup
       isOpen={isOpen}

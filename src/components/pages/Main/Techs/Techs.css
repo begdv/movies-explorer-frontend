@@ -1,3 +1,145 @@
 .Techs{
-  border: solid black 1px;
+  background: #F5F5F5;
+  width: 100%;
+  min-height: 625px;
+  box-sizing: border-box;
+  padding: 100px 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .Techs{
+    padding: 90px 60px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Techs{
+    padding: 70px 14px;
+  }
+}
+
+
+.Techs__title{
+  color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  padding-bottom: 23px;
+  border-bottom: solid #000000 1px;
+  margin: 0 0 70px;
+}
+
+@media screen and (max-width: 576px) {
+  .Techs__title{
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.Techs__content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Techs__seven-title{
+  margin: 0 0 26px;
+  color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 768px) {
+  .Techs__seven-title{
+    margin-bottom: 22px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Techs__seven-title{
+    font-size: 30px;
+    line-height: 36px;
+    margin-bottom: 24px;
+  }
+}
+
+.Techs__seven-description{
+  margin: 0 0 100px;
+  color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.04em;
+  max-width: 460px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .Techs__seven-description{
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 83px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Techs__seven-description{
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 50px;
+  }
+}
+
+.Techs__seven-table{
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  justify-items: center;
+  justify-content: center;
+  grid-template-rows: auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  width: 690px;
+}
+
+@media screen and (max-width: 768px) {
+  .Techs__seven-table{
+    grid-template-columns: repeat(auto-fit, 84px);
+    width: calc(100vw - 120px);
+  }
+}
+
+.Techs__seven-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.04em;
+  background: #E8E8E8;
+  border-radius: 10px;
+  width: 90px;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+  .Techs__seven-item{
+    font-size: 12px;
+    line-height: 15px;
+    width: 84px;
+    height: 57px
+  }
 }

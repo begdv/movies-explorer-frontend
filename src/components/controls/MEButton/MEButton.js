@@ -3,9 +3,20 @@ import clsx from 'clsx'
 import './MEButton.css';
 
 function MEButton(props) {
-  const {className, type, title} = props;
+  const {
+    type,
+    title,
+    className,
+    onClick: handleButtonClick,
+  } = props;
   return (
-    <button className={clsx('MELink', className)} type={type}>{title}</button>
+    <button
+      className={clsx('MEButton', className)}
+      type={type}
+      onClick={handleButtonClick}
+    >
+      {title}
+    </button>
   );
 }
 
