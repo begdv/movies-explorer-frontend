@@ -35,12 +35,14 @@ function MenuPopup(props) {
               onClick={handleClosePopupClick}
             />
           </li>
+          <li className="MenuPopup__navlink">
             <MENavLink
               to="/saved-movies"
               className="MENavLink_type_popup"
               title="Сохраненные фильмы"
               onClick={handleClosePopupClick}
             />
+          </li>
         </ul>
         <MEProfileButton
           onClick={handleClosePopupClick}

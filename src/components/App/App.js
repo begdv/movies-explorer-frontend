@@ -11,10 +11,39 @@ import Login from "../pages/Login/Login";
 import NotFound from "../pages/NotFound/NotFound";
 import MenuPopup from "../popups/MenuPopup/MenuPopup";
 
+import {moviesDef} from "../../utils/const";
+
 function App() {
   const [isMenuPopupOpen, setIsMenuPopupOpen] = React.useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [showCards, setShowCards] = React.useState(4);
+  const [movies, setMovies] = React.useState([]);
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setMovies(moviesDef);
+      setIsLoaded(true);
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  });
+  const handleCardLike = (likedCard) => {
+    setMovies(
+      movies.map(
+        moviesCard => {
+          if(likedCard.id === moviesCard.id){
+            moviesCard.liked = (!moviesCard.liked) ? true : false;
+          }
+          return moviesCard;
+        }
+      )
+    );
+  }
   const handleMenuPopup = () => {
     setIsMenuPopupOpen(true);
+  }
+  const handleClickCardsMore = () => {
+    setShowCards(showCards + 4);
   }
   const closePopups = () => {
     setIsMenuPopupOpen(false);
@@ -32,13 +61,23 @@ function App() {
         <Route
           path="movies"
           element={
-            <Movies onMenuPopup={handleMenuPopup}/>
+            <Movies
+              movies={movies}
+              isLoaded={isLoaded}
+              showCards={showCards}
+              onCardLike={handleCardLike}
+              onMenuPopup={handleMenuPopup}
+              onCardsMore={handleClickCardsMore}
+            />
           }
         />
         <Route
           path="saved-movies"
           element={
-            <SavedMovies onMenuPopup={handleMenuPopup}/>
+            <SavedMovies
+              isLoaded={isLoaded}
+              onMenuPopup={handleMenuPopup}
+            />
           }
         />
         <Route

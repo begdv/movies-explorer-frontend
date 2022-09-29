@@ -1,0 +1,29 @@
+.MoviesCardList{
+  margin: 0 0 80px;
+}
+
+.MoviesCardList__films{
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 36px;
+  list-style-type: none;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .MoviesCardList__films{
+    grid-template-columns: repeat( 2, minmax(339px, 1fr));
+    row-gap: 30px;
+    column-gap: 30px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .MoviesCardList__films{
+    grid-template-columns: repeat( 4, minmax(270px, 1fr));
+    column-gap: 20px;
+    row-gap: 38px;
+  }
+}

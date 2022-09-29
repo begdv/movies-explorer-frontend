@@ -8,3 +8,13 @@
   -moz-text-size-adjust: 100%;
   text-rendering:  optimizeLegibility;
 }
+
+.App__main{
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.App__movies{
+  margin: 0 auto;
+  max-width: 1280px;
+}
