@@ -5,7 +5,9 @@
   background-size: cover;
   border-radius: 50%;
   background-image: url(../../../images/logo.svg);
-  margin-right: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-right: 62px;
 }
 
 .MELogo:hover{

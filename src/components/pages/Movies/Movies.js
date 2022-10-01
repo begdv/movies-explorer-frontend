@@ -1,6 +1,6 @@
 import Header from "../../common/Header/Header";
-import SearchForm from "./SearchForm/SearchForm";
-import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import SearchForm from "../../common/SearchForm/SearchForm";
+import MoviesCardList from "../../common/MoviesCardList/MoviesCardList";
 import Footer from "../../common/Footer/Footer";
 
 import MEPreloader from "../../../components/controls/MEPreloader/MEPreloader";
@@ -31,6 +31,7 @@ function Movies(props) {
             showCards={showCards}
             onCardLike={handleCardLike}
             onCardsMore={handleClickCardsMore}
+            savedCards={false}
           />
         }
       </main>

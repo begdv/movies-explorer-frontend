@@ -4,17 +4,15 @@
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  padding-top: calc(100vh * 159 / 1552);
-  padding-bottom: calc(100vh * 90 / 1552);
+  padding-top: 144px;
+  padding-bottom: 46px;
   height: 100%;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 768px) {
   .MenuPopup{
-    padding-top: calc(100vh * 144 / 780);
-    padding-bottom: calc(100vh * 46 / 780);
-    padding-top: 144px;
-    padding-bottom: 46px;
+    padding-top: 159px;
+    padding-bottom: 90px;
   }
 }
 

@@ -21,32 +21,36 @@
   background: #DDDEE3;
   border: 1px solid #000000;
   width: 132px;
-  margin-top: auto;
   padding: 10px 20px;
   opacity: 0.6;
-  margin-bottom: 75px;
+  margin: 0 0 30px;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 768px) {
   .MEButton_type_promo{
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .MEButton_type_promo{
+    margin-top: auto;
+    margin-bottom: 25px;
   }
 }
 
 .MEButton_type_search{
-  flex: 0 0 100px;
+  flex: 0 0 80px;
   font-size: 14px;
   line-height: 18px;
-  padding: 17px 20px;
+  padding: 13px 10px;
   border-radius: 5px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 768px) {
   .MEButton_type_search{
-    flex: 0 0 80px;
-    font-size: 14px;
-    line-height: 18px;
-    padding: 13px 10px;
+    flex: 0 0 100px;
+    padding: 17px 20px;
   }
 }
 

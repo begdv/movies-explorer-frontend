@@ -1,5 +1,5 @@
-import MEButton from "../../../controls/MEButton/MEButton";
-import MEFilterSwitch from "../../../controls/MEFilterSwitch/MEFilterSwitch";
+import MEButton from "../../controls/MEButton/MEButton";
+import MEFilterSwitch from "../../controls/MEFilterSwitch/MEFilterSwitch";
 
 import './SearchForm.css';
 

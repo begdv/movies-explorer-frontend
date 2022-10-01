@@ -1,5 +1,3 @@
-import menuPopupBtn from '../../../images/popup-menu.svg'
-
 import './MEMenuPopupButton.css';
 
 function MEMenuPopupButton(props) {
@@ -12,7 +10,6 @@ function MEMenuPopupButton(props) {
       className="MEMenuPopupButton"
       onClick={handleMenuPopupButtonClick}
     >
-      <img src={menuPopupBtn} alt="Меню" />
     </button>
   );
 }

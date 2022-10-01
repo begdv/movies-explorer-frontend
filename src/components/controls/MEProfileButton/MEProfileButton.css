@@ -12,12 +12,12 @@
 }
 
 .MEProfileButton_type_header{
-  margin-left: auto;
+  display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 1280px) {
   .MEProfileButton_type_header{
-    display: none;
+    display: flex;
   }
 }
 
@@ -34,7 +34,7 @@
 .MEProfileButton__logo{
   width: 24px;
   height: 24px;
-  padding: 7.5px;
+  padding: 5px;
   box-sizing: border-box;
   background: #F4F4F4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

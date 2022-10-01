@@ -29,15 +29,13 @@
 }
 
 .Popup__container_type_menu{
-  width: 520px;
   height: 100%;
+  width: 100%;
   background: #FAFAFA;
 }
 
-@media screen and (max-width: 520px) {
-  .Popup__container_type_menu{
-      width: 100%;
-  }
+.Popup__container_type_menu{
+  max-width: 520px;
 }
 
 .Popup__button-close{
@@ -50,6 +48,7 @@
   box-sizing: border-box;
   background: transparent;
   background-image: url(../../../images/close.svg);
+  background-repeat: no-repeat;
   background-size: cover;
   border: 0;
 }

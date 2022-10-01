@@ -10,12 +10,7 @@ function Promo() {
   const promoHref = useRef(null);
   const handleClickMoreBtn = () => {
     const about = promoHref.current.nextSibling;
-    alert('click');
-//    console.log(window.pageYOffset);
-    window.scrollTo({
-      top:about.offsetTop,
-      behavior: "smooth"
-  });
+    about.scrollIntoView(false);
   }
   return (
     <section className="Promo" ref={promoHref}>

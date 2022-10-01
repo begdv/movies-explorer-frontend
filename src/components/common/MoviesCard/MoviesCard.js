@@ -1,15 +1,23 @@
+import { useLocation } from 'react-router-dom';
 import clsx from 'clsx'
 
-import {NOMOREPARTIES_URL} from "../../../../utils/const";
-import {calcDuration} from "../../../../utils/utils";
+import {NOMOREPARTIES_URL} from "../../../utils/const";
+import {calcDuration} from "../../../utils/utils";
 
 import './MoviesCard.css';
 
 function MoviesCard(props) {
+  const route = useLocation().pathname;
   const {
     moviesCard,
     onCardLike: handleCardLike,
+    onCardDelete: handleCardDelete,
   } = props;
+  const buttonCardClassName = (route === '/movies') ?
+    ((moviesCard.liked) ? 'MoviesCard__button-like_liked' : '') :  'MoviesCard__button-like_delete';
+  const handleCardClick = (moviesCard) => {
+    (route === '/movies') ? handleCardLike(moviesCard) : handleCardDelete(moviesCard)
+  }
   return (
     <li className="MoviesCard">
       <a
@@ -29,9 +37,9 @@ function MoviesCard(props) {
         <h2 className="MoviesCard__name">{moviesCard.nameRU}</h2>
         <button
           type="button"
-          className={clsx('MoviesCard__button-like', (moviesCard.liked) ? 'MoviesCard__button-like_liked' : '')}
+          className={clsx('MoviesCard__button-like', buttonCardClassName)}
           title="Нажмите кнопку чтобы сохранить фильм"
-          onClick={() => handleCardLike(moviesCard)}
+          onClick={() => handleCardClick(moviesCard)}
         >
         </button>
       </div>

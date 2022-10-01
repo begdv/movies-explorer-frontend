@@ -13,10 +13,22 @@
 .MELinkOuter_type_landing{
   font-size: 14px;
   line-height: 17px;
-  margin-top: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .MELinkOuter_type_landing{
+    margin-top: auto;
+  }
 }
 
 .MELinkOuter_type_footer{
-  font-size: 13px;
-  line-height: 16px;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .MELinkOuter_type_footer{
+    font-size: 13px;
+    line-height: 16px;
+  }
 }

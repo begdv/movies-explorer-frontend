@@ -17,6 +17,7 @@ function App() {
   const [isMenuPopupOpen, setIsMenuPopupOpen] = React.useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [showCards, setShowCards] = React.useState(4);
+  const [showSavedCards, setShowSavedCards] = React.useState(4);
   const [movies, setMovies] = React.useState([]);
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,11 +40,26 @@ function App() {
       )
     );
   }
+  const handleCardDelete = (deletedCard) => {
+    setMovies(
+      movies.map(
+        moviesCard => {
+          if(deletedCard.id === moviesCard.id){
+            moviesCard.liked = false;
+          }
+          return moviesCard;
+        }
+      )
+    );
+  }
   const handleMenuPopup = () => {
     setIsMenuPopupOpen(true);
   }
   const handleClickCardsMore = () => {
     setShowCards(showCards + 4);
+  }
+  const handleClickSaveCardsMore = () => {
+    setShowSavedCards(showSavedCards + 4);
   }
   const closePopups = () => {
     setIsMenuPopupOpen(false);
@@ -75,8 +91,12 @@ function App() {
           path="saved-movies"
           element={
             <SavedMovies
+              movies={movies}
               isLoaded={isLoaded}
+              showCards={showSavedCards}
+              onCardDelete={handleCardDelete}
               onMenuPopup={handleMenuPopup}
+              onCardsMore={handleClickSaveCardsMore}
             />
           }
         />

@@ -1,22 +1,24 @@
 .AboutProject{
+  margin: 0;
   background: #FAFAFA;
   display: flex;
   flex-direction: column;
   width: 100%;
   min-height: 608px;
   box-sizing: border-box;
-  padding: 110px 70px;
+  padding: 70px 18px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   .AboutProject{
     padding: 90px 50px;
+    min-height: 585px;
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 1280px) {
   .AboutProject{
-    padding: 70px 18px;
+    padding: 110px 70px;
   }
 }
 
@@ -25,38 +27,48 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 27px;
+  font-size: 18px;
+  line-height: 22px;
   letter-spacing: -0.04em;
-  padding-bottom: 23px;
+  padding-bottom: 28px;
   border-bottom: solid #000000 1px;
-  margin: 0 0 70px;
+  margin: 0 0 60px;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 768px) {
   .AboutProject__title{
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 22px;
+    line-height: 27px;
+    padding-bottom: 23px;
+    margin-bottom: 70px;
   }
 }
 
 .AboutProject__descrition{
   display: grid;
-  grid-auto-flow: column;
-  width: 100%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  row-gap: 22px;
-  column-gap: 40px;
-  margin-bottom: 110px;
+  grid-auto-flow: row;
+  grid-template-columns: 1fr;
+  row-gap: 16px;
+  margin-bottom: 20px;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 768px) {
   .AboutProject__descrition{
-    grid-auto-flow: row;
-    grid-template-columns: 1fr;
-    row-gap: 16px;
-    margin-bottom: 20px;
+    grid-auto-flow: column;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 22px;
+    column-gap: 30px;
+    margin-bottom: 93px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .AboutProject__descrition{
+    row-gap: 26px;
+    column-gap: 40px;
+    margin-bottom: 110px;
   }
 }
 
@@ -65,16 +77,16 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 18px;
+  line-height: 22px;
   letter-spacing: -0.04em;
   min-width: calc(50% - 11px);
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 768px) {
   .AboutProject__stage{
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 20px;
+    line-height: 24px;
   }
 }
 
@@ -83,25 +95,47 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 11px;
+  line-height: 16px;
+  margin: 0 0 40px;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 768px) {
   .AboutProject__stage-description{
-    font-size: 11px;
-    line-height: 16px;
-    margin-bottom: 40px;
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .AboutProject__stage-description{
+    font-size: 14px;
+    line-height: 20px;
   }
 }
 
 .AboutProject__timeline{
+  margin: 0;
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 4fr;
-  grid-auto-rows: 36px;
-  row-gap: 14px;
-  margin-bottom: 90px;
+  grid-auto-rows: 36px 13px;
+  row-gap: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .AboutProject__timeline{
+    grid-auto-rows: 36px 17px;
+    margin-left: 5px;
+    row-gap: 14px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .AboutProject__timeline{
+    margin-left: 0;
+  }
 }
 
 .AboutProject__timeline-backend{
@@ -112,16 +146,16 @@
   background: #3456F3;
   font-family: 'Inter';
   font-style: normal;
+  font-size: 11px;
+  line-height: 13px;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
+  min-width: 100px;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 768px) {
   .AboutProject__timeline-backend{
-    font-size: 11px;
-    line-height: 13px;
-    min-width: 100px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
 
@@ -134,14 +168,14 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 11px;
+  line-height: 13px;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 768px) {
   .AboutProject__timeline-frontend{
-    font-size: 11px;
-    line-height: 13px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
 
@@ -151,15 +185,15 @@
   justify-content: center;
   font-family: 'Suisse Intl';
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
   color: #A0A0A0;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 768px) {
   .AboutProject__timeline-description{
-    font-size: 11px;
-    line-height: 13px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

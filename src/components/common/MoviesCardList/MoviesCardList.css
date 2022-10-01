@@ -7,7 +7,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 36px;
+  row-gap: 32px;
   list-style-type: none;
   width: 100%;
 }
@@ -15,7 +15,7 @@
 @media screen and (min-width: 768px) {
   .MoviesCardList__films{
     grid-template-columns: repeat( 2, minmax(339px, 1fr));
-    row-gap: 30px;
+    row-gap: 27px;
     column-gap: 30px;
   }
 }
@@ -26,4 +26,16 @@
     column-gap: 20px;
     row-gap: 38px;
   }
+}
+
+.MoviesCardList__notfound{
+  color: #000000;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
 }

@@ -38,17 +38,6 @@ function Portfolio() {
           &#x2197;
         </a>
         </li>
-        <li className="Portfolio_item">
-          <span className="Portfolio_item-title">Одностраничное приложение c бэкендом</span>
-          <a
-            className="Portfolio_item-ref"
-            href="https://github.com/begdv/react-mesto-api-full"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-          &#x2197;
-        </a>
-        </li>
       </ul>
     </div>
   );

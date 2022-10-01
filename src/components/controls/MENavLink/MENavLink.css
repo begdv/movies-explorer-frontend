@@ -6,28 +6,23 @@
   text-decoration: none;
 }
 
-.MENavLink:hover{
-  font-weight: 500;
-}
-
-.MENavLink.active{
-  font-weight: 500;
-}
-
 .MENavLink_type_header{
   font-size: 13px;
   line-height: 18px;
+  display: none;
 }
 
-@media screen and (max-width: 768px) {
+.MENavLink_type_header:hover{
+  font-weight: 500;
+}
+
+.MENavLink_type_header.active{
+  font-weight: 500;
+}
+
+@media screen and (min-width: 1280px) {
   .MENavLink_type_header{
-    display: none;
-  }
-  .MENavLink:hover{
-    text-decoration: underline;
-  }
-  .MENavLink.active{
-    text-decoration: underline;
+    display: inline-block;
   }
 }
 
@@ -35,4 +30,12 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
+}
+
+.MENavLink_type_popup:hover{
+  text-decoration: underline;
+}
+
+.MENavLink_type_popup.active{
+  text-decoration: underline;
 }

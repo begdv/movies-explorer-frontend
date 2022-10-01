@@ -11,13 +11,12 @@
 }
 
 .MELink_type_header{
-  font-size: 12px;
+  font-size: 10px;
   line-height: 16px;
 }
 
-@media screen and (max-width: 320px) {
-  .MELinkButton_type_header{
-    margin-left: 26px;
-    font-size: 10px;
+@media screen and (min-width: 768px) {
+  .MELink_type_header{
+    font-size: 12px;
   }
 }

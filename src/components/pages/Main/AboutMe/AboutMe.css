@@ -2,18 +2,18 @@
   background: #FAFAFA;
   width: 100%;
   box-sizing: border-box;
-  padding: 110px 70px 125px;
+  padding: 70px 14px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 768px) {
   .AboutMe{
     padding: 90px 50px;
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 1280px) {
   .AboutMe{
-    padding: 70px 14px;
+    padding: 110px 70px 125px;
   }
 }
 
@@ -22,76 +22,79 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 27px;
+  font-size: 18px;
+  line-height: 22px;
   letter-spacing: -0.04em;
-  padding-bottom: 23px;
+  padding-bottom: 28px;
   border-bottom: solid #000000 1px;
-  margin: 0 0 70px;
+  margin: 0 0 60px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 768px) {
   .AboutMe__title{
+    font-size: 22px;
+    line-height: 27px;
+    padding-bottom: 23px;
     margin-bottom: 66px;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .AboutMe__title{
-    font-size: 18px;
-    line-height: 22px;
-    margin-bottom: 60px;
   }
 }
 
 .AboutMe__content{
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  margin-bottom: 100px;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 70px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 768px) {
   .AboutMe__content{
     margin-bottom: 90px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: stretch;
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 1280px) {
   .AboutMe__content{
-    flex-direction: column;
-    align-items: center;
-    padding: 70px 10px 0;
-    margin-bottom: 70px;
+    margin-bottom: 100px;
   }
 }
 
 .AboutMe-photo{
-  width: 270px;
-  height: 327px;
-  margin: 0 0 0 50px;
+  margin: 0 0 44px;
+  width: calc(100vw - 28px);
+  height: auto;
+  margin: 0 0 38px 0;
+  border-radius: 10px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 768px) {
   .AboutMe-photo{
     width: 255px;
     height: 307px;
+    margin: 0 0 0 50px;
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 1280px) {
   .AboutMe-photo{
-      margin-bottom: 44px;
-      width: calc(100vw - 28px);
-      height: auto;
-      margin: 0 0 40px 0;
+    width: 270px;
+    height: 327px;
   }
 }
 
 .AboutMe__review{
+  margin: 0;
   display: flex;
   flex-direction: column;
-  max-width: 600px;
+  justify-content: flex-start;
+}
+
+@media screen and (min-width: 768px) {
+  .AboutMe__review{
+    max-width: 600px;
+  }
 }
 
 .AboutMe__name{
@@ -99,25 +102,25 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 50px;
-  line-height: 58px;
+  font-size: 30px;
+  line-height: 36px;
   letter-spacing: -0.04em;
-  margin: 0 0 18px;
+  margin: 0 0 20px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 768px) {
   .AboutMe__name{
+    margin-bottom: 16px;
     font-size: 40px;
     line-height: 40px;
-    margin-bottom: 16px;
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 1280px) {
   .AboutMe__name{
-    font-size: 30px;
-    line-height: 36px;
-    margin-bottom: 20px;
+    font-size: 50px;
+    line-height: 58px;
+    margin-bottom: 18px;
   }
 }
 
@@ -126,17 +129,24 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 20px;
-  letter-spacing: -0.04em;
-  margin: 0 0 26px;
+  font-size: 11px;
+  line-height: 16px;
+  margin: 0 0 20px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 768px) {
   .AboutMe__description{
     font-size: 12px;
     line-height: 18px;
     margin-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .AboutMe__description{
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 26px;
   }
 }
 
@@ -152,13 +162,12 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 22px;
-  letter-spacing: -0.04em;
-  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+  margin: 0 0 40px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 768px) {
   .AboutMe__biography{
     font-size: 12px;
     line-height: 18px;
@@ -167,11 +176,10 @@
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 1280px) {
   .AboutMe__biography{
-    font-size: 11px;
-    line-height: 16px;
-    margin-bottom: 40px;
-    max-width: 512px;
+    font-size: 14px;
+    line-height: 22px;
+    max-width: 600px;
   }
 }

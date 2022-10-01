@@ -31,10 +31,10 @@ function Header(props) {
             <MEMenuPopupButton onClick={handleMenuPopupButtonClick}/>
           </>
         :
-          <>
+          <div className="Header__sign">
             <MELink className="MELink_type_header" to="/signup" title="Регистрация"/>
             <MELinkButton className="MELinkButton_type_header" to="/signin" title="Войти"/>
-          </>
+          </div>
         }
       </nav>
     </header>

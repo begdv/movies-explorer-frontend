@@ -5,11 +5,12 @@
 }
 
 .MoviesCard__trailer-link{
-  margin: 0 0 14px;
+  margin: 0 0 8px;
 }
 
 .MoviesCard__image{
   margin: 0;
+  padding: 0;
   height: calc(100vw * 168 / 320);
   object-fit: cover;
   width: 100%;
@@ -33,8 +34,14 @@
   align-items: center;
   margin: 0 0 6px;
   box-sizing: border-box;
-  padding: 0 0 29px;
+  padding: 0 0 25px;
   border-bottom: solid #E8E8E8 1px;
+}
+
+@media screen and (min-width: 768px) {
+  .MoviesCard__info{
+    padding-bottom: 23px;
+  }
 }
 
 .MoviesCard__name{
@@ -64,14 +71,18 @@
   width: 24px;
   height: 24px;
   background-color: #F4F4F4;
-  background-image: url(../../../../images/card-like.svg);
+  background-image: url(../../../images/card-like.svg);
   background-position: center center;
   background-repeat: no-repeat;
   border-radius: 36px;
 }
 
 .MoviesCard__button-like_liked{
-  background-image: url(../../../../images/card-liked.svg);
+  background-image: url(../../../images/card-liked.svg);
+}
+
+.MoviesCard__button-like_delete{
+  background-image: url(../../../images/card-delete.svg);
 }
 
 .MoviesCard__button-like:hover{
@@ -87,7 +98,7 @@
   line-height: 12px;
   display: flex;
   align-items: center;
-  margin: 0 0 10px;
+  margin: 0;
 }
 
 @media screen and (min-width: 768px) {

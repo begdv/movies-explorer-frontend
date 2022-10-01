@@ -1,3 +1,18 @@
-.SavedMovies{
-  border: solid black 1px;
+.SavedMovies__content{
+  margin: 0;
+  padding: 40px 10px 0;
+  box-sizing: border-box;
+  min-height: 100px;
+}
+
+@media screen and (min-width: 768px) {
+  .SavedMovies__content{
+    padding: 70px 30px 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .SavedMovies__content{
+    padding: 70px 70px 0;
+  }
 }
