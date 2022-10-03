@@ -5,7 +5,7 @@ import './SearchForm.css';
 
 function SearchForm(props) {
   return (
-    <form className="SearchForm" name="SearchForm" noValidate>
+    <form className="SearchForm" name="search-movie" noValidate>
       <div className="SearchForm__input">
         <input
           className="SearchForm__input-movie"

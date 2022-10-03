@@ -7,13 +7,13 @@
 
 @media screen and (min-width: 768px) {
   .AboutMe{
-    padding: 90px 50px;
+    padding: 90px 50px 84px;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .AboutMe{
-    padding: 110px 70px 125px;
+    padding: 110px 70px 115px;
   }
 }
 

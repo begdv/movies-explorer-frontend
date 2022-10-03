@@ -1,3 +1,52 @@
-.Profile{
-  border: solid black 1px;
+.Profile__content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 70px 30px 40px;
+  box-sizing: border-box;
+  min-height: 706px;
+}
+
+@media screen and (min-width: 768px) {
+  .Profile__content{
+    padding: 236px 179px 269px;
+    min-height: 950px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .Profile__content{
+    padding: 74px 435px 70px;
+    min-height: 626px;
+  }
+}
+
+.Profile__title{
+  color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  margin: 0 0 80px;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .Profile__title{
+    margin-bottom: 96px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .Profile__title{
+    margin-bottom: 123px;
+  }
+}
+
+.Profile__form{
+  margin: 0 0 auto;
+  width: 100%;
 }

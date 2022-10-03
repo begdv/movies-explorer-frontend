@@ -30,12 +30,13 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
+  padding-bottom: 6px;
 }
 
 .MENavLink_type_popup:hover{
-  text-decoration: underline;
+  border-bottom: solid #000000 2px;
 }
 
 .MENavLink_type_popup.active{
-  text-decoration: underline;
+  border-bottom: solid #000000 2px;
 }
