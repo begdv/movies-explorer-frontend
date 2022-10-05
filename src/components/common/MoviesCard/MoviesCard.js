@@ -7,16 +7,16 @@ import {calcDuration} from "../../../utils/utils";
 import './MoviesCard.css';
 
 function MoviesCard(props) {
-  const route = useLocation().pathname;
+  const route = useLocation().pathname.replaceAll('/','');
   const {
     moviesCard,
     onCardLike: handleCardLike,
     onCardDelete: handleCardDelete,
   } = props;
-  const buttonCardClassName = (route === '/movies') ?
+  const buttonCardClassName = (route === 'movies') ?
     ((moviesCard.liked) ? 'MoviesCard__button-like_liked' : '') :  'MoviesCard__button-like_delete';
   const handleCardClick = (moviesCard) => {
-    (route === '/movies') ? handleCardLike(moviesCard) : handleCardDelete(moviesCard)
+    (route === 'movies') ? handleCardLike(moviesCard) : handleCardDelete(moviesCard)
   }
   return (
     <li className="MoviesCard">
@@ -34,7 +34,7 @@ function MoviesCard(props) {
         />
       </a>
       <div className="MoviesCard__info">
-        <h2 className="MoviesCard__name">{moviesCard.nameRU}</h2>
+        <p className="MoviesCard__name">{moviesCard.nameRU}</p>
         <button
           type="button"
           className={clsx('MoviesCard__button-like', buttonCardClassName)}

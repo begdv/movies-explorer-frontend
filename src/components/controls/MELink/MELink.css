@@ -13,10 +13,24 @@
 .MELink_type_header{
   font-size: 10px;
   line-height: 16px;
+  margin-left: auto;
 }
 
 @media screen and (min-width: 768px) {
   .MELink_type_header{
     font-size: 12px;
+  }
+}
+
+.MELink_type_signing{
+  font-size: 12px;
+  line-height: 15px;
+  color: #3456F3;
+}
+
+@media screen and (min-width: 768px) {
+  .MELink_type_signing{
+    font-size: 14px;
+    line-height: 17px;
   }
 }

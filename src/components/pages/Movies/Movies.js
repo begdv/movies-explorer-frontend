@@ -1,4 +1,3 @@
-import Header from "../../common/Header/Header";
 import SearchForm from "../../common/SearchForm/SearchForm";
 import MoviesCardList from "../../common/MoviesCardList/MoviesCardList";
 import Footer from "../../common/Footer/Footer";
@@ -12,16 +11,11 @@ function Movies(props) {
     movies,
     isLoaded,
     showCards,
-    onMenuPopup: handleMenuPopup,
     onCardLike: handleCardLike,
     onCardsMore: handleClickCardsMore,
   } = props;
   return (
-    <div className="Movies  App__movies">
-      <Header
-        isLoggedIn={true}
-        onMenuPopup={handleMenuPopup}
-      />
+    <div className="Movies App__main">
       <SearchForm />
       <main className="Movies__content">
         <MEPreloader isShow={!isLoaded}/>

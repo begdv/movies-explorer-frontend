@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
+import Header from "../common/Header/Header";
 import Main from "../pages/Main/Main";
 import Movies from "../pages/Movies/Movies";
 import SavedMovies from "../pages/SavedMovies/SavedMovies";
@@ -26,7 +27,7 @@ function App() {
       setShowSavedCards(getInitialShowCardsCount(window.innerWidth));
       setMovies(moviesDef);
       setIsLoaded(true);
-    }, 3000);
+    }, 2000);
     return () => {
       clearTimeout(timer);
     };
@@ -84,6 +85,10 @@ function App() {
   }
   return (
     <div className="App">
+      <Header
+        isLoggedIn={false}
+        onMenuPopup={handleMenuPopup}
+      />
       <Routes>
         <Route
           exact
@@ -125,16 +130,17 @@ function App() {
           }
         />
         <Route
+          path="signup"
+          element={
+            <Register />
+          }
+        />
+        <Route
           path="signin"
           element={
             <Login />
           }
         />
-        <Route
-          path="signup"
-          element={
-            <Register />
-          } />
         <Route
           path="*"
           element={

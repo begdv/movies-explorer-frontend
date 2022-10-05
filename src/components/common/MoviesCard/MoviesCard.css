@@ -31,42 +31,43 @@
 .MoviesCard__info{
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: 0 0 8px;
+  align-items: flex-start;
+  margin: 0 0 6px;
   box-sizing: border-box;
-  padding: 0 0 26px;
+  padding: 0 0 13px;
   border-bottom: solid #E8E8E8 1px;
 }
 
 @media screen and (min-width: 768px) {
   .MoviesCard__info{
-    padding-bottom: 24px;
+    padding-bottom: 14px;
   }
 }
 
 .MoviesCard__name{
   margin: 0;
+  padding: 6px 0 0;
   color: #000000;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
+  height: 32px;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {
   .MoviesCard__name{
     font-size: 13px;
     line-height: 16px;
+    padding-top: 4px;
   }
 }
 
 .MoviesCard__button-like{
-  display: flex;
-  justify-content: center;
   box-sizing: border-box;
-  align-items: center;
-  margin: 0;
+  margin: 0 0 8px;
   border: 0;
   width: 24px;
   height: 24px;

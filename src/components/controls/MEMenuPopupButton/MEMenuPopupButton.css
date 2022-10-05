@@ -10,6 +10,10 @@
   background-size: cover;
 }
 
+.MEMenuPopupButton_page_main{
+  background: #DDDEE3;
+}
+
 .MEMenuPopupButton:hover{
   opacity: 0.8;
   cursor: pointer;

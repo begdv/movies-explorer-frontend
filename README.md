@@ -15,14 +15,18 @@
 
 Разработка фронтенда для веб-приложений с использованием React.
 
+**Ссылка на макет**
+
+https://disk.yandex.ru/d/KV05t-TLtnFf5g
 
 **Публичный IP-адрес сервера**
 
-
+84.252.137.43
 
 **Ссылки на страницу**
 
-
+http://begunovdv.movies-explorer.nomoredomains.sbs
+https://begunovdv.movies-explorer.nomoredomains.sbs
 
 **Автор**
 

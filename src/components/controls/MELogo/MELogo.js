@@ -1,9 +1,13 @@
-import './MELogo.css';
 import { Link } from 'react-router-dom';
 
-function MELogo() {
+import clsx from 'clsx'
+
+import './MELogo.css';
+
+function MELogo(props) {
+  const {className} = props;
   return (
-    <Link className="MELogo" to="/" title="О проекте"></Link>
+    <Link className={clsx('MELogo', className)} to="/" title="О проекте"></Link>
   );
 }
 

@@ -1,4 +1,3 @@
-import Header from "../../common/Header/Header";
 import SearchForm from "../../common/SearchForm/SearchForm";
 import MoviesCardList from "../../common/MoviesCardList/MoviesCardList";
 import Footer from "../../common/Footer/Footer";
@@ -10,16 +9,11 @@ function SavedMovies(props) {
     movies,
     isLoaded,
     showCards,
-    onMenuPopup: handleMenuPopup,
     onCardDelete: handleCardDelete,
     onCardsMore: handleClickCardsMore,
   } = props;
   return (
-    <div className="SavedMovies App__save-movies">
-      <Header
-        isLoggedIn={true}
-        onMenuPopup={handleMenuPopup}
-      />
+    <div className="SavedMovies App__main">
       <SearchForm />
       <main className="SavedMovies__content">
         {

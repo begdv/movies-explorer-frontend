@@ -1,3 +1,7 @@
+.Profile{
+  min-height: 100%;
+}
+
 .Profile__content{
   display: flex;
   flex-direction: column;
@@ -5,20 +9,20 @@
   margin: 0;
   padding: 70px 30px 40px;
   box-sizing: border-box;
-  min-height: 706px;
+  min-height: calc(100vh - 74px);
 }
 
 @media screen and (min-width: 768px) {
   .Profile__content{
-    padding: 236px 179px 269px;
-    min-height: 950px;
+    padding: 236px 30px 269px;
+    min-height: calc(100vh - 74px);
   }
 }
 
 @media screen and (min-width: 1280px) {
   .Profile__content{
-    padding: 74px 435px 70px;
-    min-height: 626px;
+    padding: 74px 30px 70px;
+    min-height: calc(100vh - 94px);
   }
 }
 
@@ -47,6 +51,14 @@
 }
 
 .Profile__form{
-  margin: 0 0 auto;
+  margin: 0 0 30px;
+}
+
+.Profile__controls{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto 0 0;
   width: 100%;
+  max-width: 396px;
 }

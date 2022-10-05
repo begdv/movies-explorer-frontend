@@ -1,0 +1,17 @@
+
+.MEFormError{
+  color: #EE3465;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  visibility: hidden;
+  width: calc(100vw - 60px);
+  max-width: 396px;
+  text-align: left;
+}
+
+.MEFormError_show{
+  visibility: visible;
+}

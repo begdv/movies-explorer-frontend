@@ -9,7 +9,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css';
 
 function MoviesCardList(props) {
-  const route = useLocation().pathname;
+  const route = useLocation().pathname.replaceAll('/','');
   const {
     movies,
     showCards,
@@ -20,7 +20,7 @@ function MoviesCardList(props) {
   const cntSavedMovies = movies.reduce((cnt, current) =>
     (current &&  current.liked) ? cnt + 1 : cnt
   , 0);
-  const cntMovies = (route === '/movies') ? movies.length : cntSavedMovies;
+  const cntMovies = (route === 'movies') ? movies.length : cntSavedMovies;
   return (
     <section className="MoviesCardList">
       {
@@ -28,7 +28,7 @@ function MoviesCardList(props) {
           <ul className="MoviesCardList__films">
             {movies && movies.map((moviesCard, index) =>
               (index < showCards)
-              && ((route === '/movies') || ((route === '/saved-movies') && moviesCard.liked))
+              && ((route === 'movies') || ((route === 'saved-movies') && moviesCard.liked))
               && <MoviesCard
                 key={moviesCard._id}
                 moviesCard={moviesCard}
