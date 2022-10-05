@@ -1,6 +1,5 @@
 import SearchForm from "../../common/SearchForm/SearchForm";
 import MoviesCardList from "../../common/MoviesCardList/MoviesCardList";
-import Footer from "../../common/Footer/Footer";
 
 import './SavedMovies.css';
 
@@ -13,9 +12,9 @@ function SavedMovies(props) {
     onCardsMore: handleClickCardsMore,
   } = props;
   return (
-    <div className="SavedMovies App__main">
+    <main className="SavedMovies App__main">
       <SearchForm />
-      <main className="SavedMovies__content">
+      <section className="SavedMovies__content">
         {
           isLoaded && movies && <MoviesCardList
             movies={movies}
@@ -24,9 +23,8 @@ function SavedMovies(props) {
             onCardsMore={handleClickCardsMore}
           />
         }
-      </main>
-      <Footer/>
-    </div>
+      </section>
+    </main>
   );
 }
 

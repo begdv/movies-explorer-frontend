@@ -27,7 +27,7 @@
 }
 
 .MEFormInput__input{
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   border: none;
   outline: none;
@@ -39,7 +39,7 @@
   max-width: 122px;
   flex-basis: 50%;
   color: #000000;
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 11px;
@@ -50,6 +50,10 @@
   background: #FAFAFA;
 }
 
+.MEFormInput__input_page_profile:focus{
+  font-size: 12px;
+}
+
 @media screen and (min-width: 768px) {
   .MEFormInput_page_profile{
     width: 410px;
@@ -58,7 +62,7 @@
 
 .MEFormInput__input_page_signing{
   color: #000000;
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -70,12 +74,16 @@
   border-radius: 8px;
 }
 
+.MEFormInput__input_page_signing:focus{
+  border: solid #E4E4E4 1px;
+}
+
 .MEFormInput__input_error{
   color: #EE3465;
 }
 
 .MEFormInput__label{
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
 }
 

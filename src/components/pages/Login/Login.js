@@ -17,8 +17,8 @@ function Login() {
     setPassword(e.target.value);
   }
   return (
-    <div className="Login App__main">
-      <main className="Login__content">
+    <main className="Login App__main">
+      <section className="Login__content">
         <h1 className="Login__title">Рады видеть!</h1>
         <form className="Login__form" name="LoginForm" noValidate>
           <MEFormInput
@@ -59,8 +59,8 @@ function Login() {
             <MELink className="MELink_type_signing" to="/signup" title="Регистрация"/>
           </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
 

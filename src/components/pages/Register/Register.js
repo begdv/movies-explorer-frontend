@@ -21,8 +21,8 @@ function Register(props) {
     setPassword(e.target.value);
   }
   return (
-    <div className="Register App__main">
-      <main className="Register__content">
+    <main className="Register App__main">
+      <section className="Register__content">
         <h1 className="Register__title">Добро пожаловать!</h1>
         <form className="Register__form" name="RegisterForm" noValidate>
           <MEFormInput
@@ -74,8 +74,8 @@ function Register(props) {
             <MELink className="MELink_type_signing" to="/signin" title="Войти"/>
           </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
 

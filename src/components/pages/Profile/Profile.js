@@ -24,8 +24,8 @@ function Profile(props) {
     SetIsEditProfile(false);
   }
   return (
-    <div className="Profile App__main">
-      <main className="Profile__content">
+    <main className="Profile App__main">
+      <section className="Profile__content">
         <h1 className="Profile__title">Привет, Виталий!</h1>
         <form className="Profile__form" name="ProfileForm" noValidate>
           <MEFormInput
@@ -53,7 +53,7 @@ function Profile(props) {
           <MEFormError
             hasError="false"
             errorMessage=""
-          />          
+          />
         </form>
 
         {
@@ -81,9 +81,8 @@ function Profile(props) {
             />
           </div>
         }
-
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
 

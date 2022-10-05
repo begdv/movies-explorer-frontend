@@ -13,6 +13,7 @@ function SearchForm(props) {
           type="text"
           name="movie"
           size="1"
+          required
         />
         <MEButton
           className="MEButton_type_search"

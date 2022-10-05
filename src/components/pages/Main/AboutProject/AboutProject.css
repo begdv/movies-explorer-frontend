@@ -23,7 +23,7 @@
 
 .AboutProject__title{
   color: #000000;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -73,7 +73,7 @@
 
 .AboutProject__stage{
   color: #000000;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -91,7 +91,7 @@
 
 .AboutProject__stage-description{
   color: #000000;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 11px;
@@ -143,7 +143,7 @@
   justify-content: center;
   color: #FFFFFF;
   background: #3456F3;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-size: 11px;
   line-height: 13px;
@@ -164,7 +164,7 @@
   justify-content: center;
   color: #000000;
   background: #F2F2F2;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 11px;
@@ -182,7 +182,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Suisse Intl';
+  font-family: 'SuisseIntl', Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 11px;

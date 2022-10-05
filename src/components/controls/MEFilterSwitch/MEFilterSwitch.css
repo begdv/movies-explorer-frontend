@@ -16,11 +16,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #343434;
+  background-color: #EBEBEB;;
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 34px;
   box-shadow: 0px 4px 4px rgba(50, 50, 71, 0.08), 0px 4px 8px rgba(50, 50, 71, 0.06);
+}
+.MEFilterSwitch__slider:hover {
+  opacity: 0.8;
 }
 
 .MEFilterSwitch__slider:before {
@@ -30,7 +33,7 @@
   width: 16px;
   left: 2px;
   bottom: 2px;
-  background-color: #A0A0A0;
+  background-color: #F5F5F5;
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 16px;

@@ -33,7 +33,7 @@
 
 .SearchForm__input-movie{
   flex: 1 1 50px;
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -44,6 +44,7 @@
   border: none;
   outline: none;
   -webkit-appearance: none;
+  border-radius: 4px;
 }
 
 @media screen and (min-width: 768px) {
@@ -52,6 +53,14 @@
     line-height: 20px;
     padding: 12px 16px 13px;
   }
+}
+
+.SearchForm__input-movie:focus{
+  color: #000000;
+}
+
+.SearchForm__input-movie:hover{
+  opacity: 0.8;
 }
 
 .SearchForm__shortfilm{
@@ -76,7 +85,7 @@
 
 .SearchForm__shortfilm-title{
   color: #000000;
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 11px;

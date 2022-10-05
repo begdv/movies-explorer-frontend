@@ -1,6 +1,5 @@
 import SearchForm from "../../common/SearchForm/SearchForm";
 import MoviesCardList from "../../common/MoviesCardList/MoviesCardList";
-import Footer from "../../common/Footer/Footer";
 
 import MEPreloader from "../../../components/controls/MEPreloader/MEPreloader";
 
@@ -15,9 +14,9 @@ function Movies(props) {
     onCardsMore: handleClickCardsMore,
   } = props;
   return (
-    <div className="Movies App__main">
+    <main className="Movies App__main">
       <SearchForm />
-      <main className="Movies__content">
+      <section className="Movies__content">
         <MEPreloader isShow={!isLoaded}/>
         {
           isLoaded && movies && <MoviesCardList
@@ -28,9 +27,8 @@ function Movies(props) {
             savedCards={false}
           />
         }
-      </main>
-      <Footer/>
-    </div>
+      </section>
+   </main>
   );
 }
 

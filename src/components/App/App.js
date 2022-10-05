@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Header from "../common/Header/Header";
+import Footer from "../common/Footer/Footer";
 import Main from "../pages/Main/Main";
 import Movies from "../pages/Movies/Movies";
 import SavedMovies from "../pages/SavedMovies/SavedMovies";
@@ -94,33 +95,42 @@ function App() {
           exact
           path="/"
           element={
-            <Main onMenuPopup={handleMenuPopup}/>
+            <>
+              <Main onMenuPopup={handleMenuPopup}/>
+              <Footer/>
+            </>
           }
         />
         <Route
           path="movies"
           element={
-            <Movies
-              movies={movies}
-              isLoaded={isLoaded}
-              showCards={showCards}
-              onCardLike={handleCardLike}
-              onMenuPopup={handleMenuPopup}
-              onCardsMore={handleClickCardsMore}
-            />
+            <>
+              <Movies
+                movies={movies}
+                isLoaded={isLoaded}
+                showCards={showCards}
+                onCardLike={handleCardLike}
+                onMenuPopup={handleMenuPopup}
+                onCardsMore={handleClickCardsMore}
+              />
+              <Footer/>
+            </>
           }
         />
         <Route
           path="saved-movies"
           element={
-            <SavedMovies
-              movies={movies}
-              isLoaded={isLoaded}
-              showCards={showSavedCards}
-              onCardDelete={handleCardDelete}
-              onMenuPopup={handleMenuPopup}
-              onCardsMore={handleClickSaveCardsMore}
-            />
+            <>
+              <SavedMovies
+                movies={movies}
+                isLoaded={isLoaded}
+                showCards={showSavedCards}
+                onCardDelete={handleCardDelete}
+                onMenuPopup={handleMenuPopup}
+                onCardsMore={handleClickSaveCardsMore}
+              />
+              <Footer/>
+            </>
           }
         />
         <Route
