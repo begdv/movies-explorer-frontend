@@ -1,7 +1,7 @@
 import React from 'react';
-import { Routes, Route } from "react-router-dom";
-import "./App.css";
+import { Routes, Route, Navigate } from "react-router-dom";
 
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import Header from "../common/Header/Header";
 import Footer from "../common/Footer/Footer";
 import Main from "../pages/Main/Main";
@@ -16,7 +16,11 @@ import MenuPopup from "../popups/MenuPopup/MenuPopup";
 import {moviesDef} from "../../utils/const";
 import {getInitialShowCardsCount, setResizeShowCardsCount, setAppendShowCardsCount} from "../../utils/utils";
 
+import "./App.css";
+
 function App() {
+  const [currentUser, setCurrentUser] = React.useState(null);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isMenuPopupOpen, setIsMenuPopupOpen] = React.useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [showCards, setShowCards] = React.useState(0);
@@ -86,82 +90,99 @@ function App() {
   }
   return (
     <div className="App">
-      <Header
-        isLoggedIn={false}
-        onMenuPopup={handleMenuPopup}
-      />
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <>
-              <Main onMenuPopup={handleMenuPopup}/>
-              <Footer/>
-            </>
-          }
+      <CurrentUserContext.Provider value={currentUser}>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <Header isLoggedIn={isLoggedIn} onMenuPopup={handleMenuPopup} />
+                <Main onMenuPopup={handleMenuPopup}/>
+                <Footer/>
+              </>
+            }
+          />
+          <Route
+            path="movies"
+            element={
+              !isLoggedIn ? <Navigate to="/" /> :
+              <>
+                <Header isLoggedIn={isLoggedIn} onMenuPopup={handleMenuPopup} />
+                <Movies
+                  isLoggedIn={isLoggedIn}
+                  movies={movies}
+                  isLoaded={isLoaded}
+                  showCards={showCards}
+                  onCardLike={handleCardLike}
+                  onMenuPopup={handleMenuPopup}
+                  onCardsMore={handleClickCardsMore}
+                />
+                <Footer/>
+              </>
+            }
+          />
+          <Route
+            path="saved-movies"
+            element={
+              !isLoggedIn ? <Navigate to="/" /> :
+              <>
+                <Header isLoggedIn={isLoggedIn} onMenuPopup={handleMenuPopup} />
+                <SavedMovies
+                  isLoggedIn={isLoggedIn}
+                  movies={movies}
+                  isLoaded={isLoaded}
+                  showCards={showSavedCards}
+                  onCardDelete={handleCardDelete}
+                  onMenuPopup={handleMenuPopup}
+                  onCardsMore={handleClickSaveCardsMore}
+                />
+                <Footer/>
+              </>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              !isLoggedIn ? <Navigate to="/" /> :
+                <>
+                  <Header isLoggedIn={isLoggedIn} onMenuPopup={handleMenuPopup} />
+                  <Profile onMenuPopup={handleMenuPopup}/>
+                </>
+            }
+          />
+          <Route
+            path="signup"
+            element={
+              isLoggedIn ? <Navigate to="/" /> :
+                <>
+                  <Header/>
+                  <Register />
+                </>
+            }
+          />
+          <Route
+            path="signin"
+            element={
+              isLoggedIn ? <Navigate to="/" /> :
+                <>
+                  <Header/>
+                  <Login />
+                </>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <NotFound />
+            }
+          />
+        </Routes>
+        <MenuPopup
+          isOpen={isMenuPopupOpen}
+          onClose={closePopups}
         />
-        <Route
-          path="movies"
-          element={
-            <>
-              <Movies
-                movies={movies}
-                isLoaded={isLoaded}
-                showCards={showCards}
-                onCardLike={handleCardLike}
-                onMenuPopup={handleMenuPopup}
-                onCardsMore={handleClickCardsMore}
-              />
-              <Footer/>
-            </>
-          }
-        />
-        <Route
-          path="saved-movies"
-          element={
-            <>
-              <SavedMovies
-                movies={movies}
-                isLoaded={isLoaded}
-                showCards={showSavedCards}
-                onCardDelete={handleCardDelete}
-                onMenuPopup={handleMenuPopup}
-                onCardsMore={handleClickSaveCardsMore}
-              />
-              <Footer/>
-            </>
-          }
-        />
-        <Route
-          path="profile"
-          element={
-            <Profile onMenuPopup={handleMenuPopup}/>
-          }
-        />
-        <Route
-          path="signup"
-          element={
-            <Register />
-          }
-        />
-        <Route
-          path="signin"
-          element={
-            <Login />
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <NotFound />
-          }
-        />
-      </Routes>
-      <MenuPopup
-        isOpen={isMenuPopupOpen}
-        onClose={closePopups}
-      />
+      </CurrentUserContext.Provider>
     </div>
   );
 }

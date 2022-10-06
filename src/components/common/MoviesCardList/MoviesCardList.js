@@ -1,5 +1,3 @@
-import { useLocation } from 'react-router-dom';
-
 import clsx from 'clsx'
 
 import MEButton from '../../controls/MEButton/MEButton';
@@ -9,18 +7,18 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css';
 
 function MoviesCardList(props) {
-  const route = useLocation().pathname.replaceAll('/','');
   const {
     movies,
     showCards,
     onCardLike: handleCardLike,
     onCardDelete: handleCardDelete,
     onCardsMore: handleClickCardsMore,
+    savedCards = "false",
   } = props;
   const cntSavedMovies = movies.reduce((cnt, current) =>
     (current &&  current.liked) ? cnt + 1 : cnt
   , 0);
-  const cntMovies = (route === 'movies') ? movies.length : cntSavedMovies;
+  const cntMovies = (savedCards) ? cntSavedMovies : movies.length;
   return (
     <section className="MoviesCardList">
       {
@@ -28,8 +26,9 @@ function MoviesCardList(props) {
           <ul className="MoviesCardList__films">
             {movies && movies.map((moviesCard, index) =>
               (index < showCards)
-              && ((route === 'movies') || ((route === 'saved-movies') && moviesCard.liked))
+              && (!savedCards || (savedCards && moviesCard.liked))
               && <MoviesCard
+                savedCards={savedCards}
                 key={moviesCard._id}
                 moviesCard={moviesCard}
                 onCardLike={handleCardLike}

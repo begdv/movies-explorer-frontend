@@ -21,6 +21,7 @@ function SavedMovies(props) {
             showCards={showCards}
             onCardDelete={handleCardDelete}
             onCardsMore={handleClickCardsMore}
+            savedCards="true"
           />
         }
       </section>

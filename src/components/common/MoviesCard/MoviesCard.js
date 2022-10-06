@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import clsx from 'clsx'
 
 import {NOMOREPARTIES_URL} from "../../../utils/const";
@@ -7,16 +6,17 @@ import {calcDuration} from "../../../utils/utils";
 import './MoviesCard.css';
 
 function MoviesCard(props) {
-  const route = useLocation().pathname.replaceAll('/','');
   const {
     moviesCard,
     onCardLike: handleCardLike,
     onCardDelete: handleCardDelete,
+    savedCards = "false",
   } = props;
-  const buttonCardClassName = (route === 'movies') ?
-    ((moviesCard.liked) ? 'MoviesCard__button-like_liked' : '') :  'MoviesCard__button-like_delete';
+  const buttonCardClassName = (savedCards) ?
+    'MoviesCard__button-like_delete' :
+    ((moviesCard.liked) ? 'MoviesCard__button-like_liked' : '');
   const handleCardClick = (moviesCard) => {
-    (route === 'movies') ? handleCardLike(moviesCard) : handleCardDelete(moviesCard)
+    (savedCards) ?  handleCardDelete(moviesCard) : handleCardLike(moviesCard);
   }
   return (
     <li className="MoviesCard">

@@ -24,7 +24,6 @@ function Movies(props) {
             showCards={showCards}
             onCardLike={handleCardLike}
             onCardsMore={handleClickCardsMore}
-            savedCards={false}
           />
         }
       </section>
