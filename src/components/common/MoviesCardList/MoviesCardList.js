@@ -13,7 +13,7 @@ function MoviesCardList(props) {
     onCardLike: handleCardLike,
     onCardDelete: handleCardDelete,
     onCardsMore: handleClickCardsMore,
-    savedCards = "false",
+    savedCards = false,
   } = props;
   const cntSavedMovies = movies.reduce((cnt, current) =>
     (current &&  current.liked) ? cnt + 1 : cnt

@@ -6,7 +6,6 @@ import './SavedMovies.css';
 function SavedMovies(props) {
   const {
     movies,
-    isLoaded,
     showCards,
     onCardDelete: handleCardDelete,
     onCardsMore: handleClickCardsMore,
@@ -16,12 +15,12 @@ function SavedMovies(props) {
       <SearchForm />
       <section className="SavedMovies__content">
         {
-          isLoaded && movies && <MoviesCardList
+          movies && <MoviesCardList
             movies={movies}
             showCards={showCards}
             onCardDelete={handleCardDelete}
             onCardsMore={handleClickCardsMore}
-            savedCards="true"
+            savedCards={true}
           />
         }
       </section>

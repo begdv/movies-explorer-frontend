@@ -2,6 +2,8 @@ import { useLocation } from 'react-router-dom';
 
 import clsx from 'clsx'
 
+import MEFormError from "../MEFormError/MEFormError";
+
 import './MEFormInput.css';
 
 function MEFormInput(props) {
@@ -16,6 +18,7 @@ function MEFormInput(props) {
     value,
     disabled,
     hasError = false,
+    errorMessage = "",
     onChangeValue: handleChangeValue,
   } = props;
   return (
@@ -25,29 +28,40 @@ function MEFormInput(props) {
         'MEFormInput_page_profile' : 'MEFormInput_page_signing')
       }
     >
-      <span
-        className={
-          clsx('MEFormInput__label', (route === 'profile') ?
-          'MEFormInput__label_page_profile' : 'MEFormInput__label_page_signing')
+      <div className={
+        clsx('MEFormInput__control', (route === 'profile') ?
+          'MEFormInput__control_page_profile' : 'MEFormInput__control_page_signing')
         }
       >
-        {title}
-      </span>
-      <input
-        className={
-          clsx('MEFormInput__input', (route === 'profile') ?
-          'MEFormInput__input_page_profile' : 'MEFormInput__input_page_signing',
-          hasError ? 'MEFormInput__input_error' : '')
-        }
-        type={type}
-        name={name}
-        placeholder={title}
-        minLength={minLength}
-        maxLength={maxLength}
-        required={required}
-        value={value}
-        disabled={disabled}
-        onChange={handleChangeValue}
+        <span
+          className={
+            clsx('MEFormInput__label', (route === 'profile') ?
+          ' MEFormInput__label_page_profile' : 'MEFormInput__label_page_signing')
+          }
+        >
+          {title}
+        </span>
+        <input
+          className={
+            clsx('MEFormInput__input', (route === 'profile') ?
+              'MEFormInput__input_page_profile' : 'MEFormInput__input_page_signing',
+              hasError ? 'MEFormInput__input_error' : '')
+          }
+          type={type}
+          name={name}
+          placeholder={title}
+          minLength={minLength}
+          maxLength={maxLength}
+          required={required}
+          value={value}
+          disabled={disabled}
+          onChange={handleChangeValue}
+        />
+      </div>
+      <MEFormError
+        hasError={hasError}
+        errorMessage={errorMessage}
+        className="MEFormError_type_input"
       />
     </div>
   );

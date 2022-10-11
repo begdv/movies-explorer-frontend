@@ -1,0 +1,27 @@
+.InfoPopup{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 430px;
+  height: 330px;
+  box-sizing: border-box;
+  padding: 60px 36px;
+}
+
+.InfoPopup__icon{
+  width: 120px;
+  height: 120px;
+}
+
+.InfoPopup__message{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}

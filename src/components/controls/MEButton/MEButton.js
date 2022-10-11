@@ -7,12 +7,14 @@ function MEButton(props) {
     type,
     title,
     className,
+    disabled,
     onClick: handleButtonClick,
   } = props;
   return (
     <button
       className={clsx('MEButton', className)}
       type={type}
+      disabled={disabled}
       onClick={handleButtonClick}
     >
       {title}

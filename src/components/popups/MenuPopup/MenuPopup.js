@@ -1,9 +1,9 @@
 import MENavLink from '../../controls/MENavLink/MENavLink';
 import MEProfileButton from '../../controls/MEProfileButton/MEProfileButton';
 
-import './MenuPopup.css';
-
 import Popup from "../Popup/Popup";
+
+import './MenuPopup.css';
 
 function MenuPopup(props) {
   const {

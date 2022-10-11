@@ -1,7 +1,9 @@
 import React from 'react';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import {mainApi} from '../../api/MainApi';
+import {moviesApi} from '../../api/MoviesApi';
 import Header from "../common/Header/Header";
 import Footer from "../common/Footer/Footer";
 import Main from "../pages/Main/Main";
@@ -12,31 +14,59 @@ import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import NotFound from "../pages/NotFound/NotFound";
 import MenuPopup from "../popups/MenuPopup/MenuPopup";
+import InfoPopup from "../popups/InfoPopup/InfoPopup";
 
-import {moviesDef} from "../../utils/const";
 import {getInitialShowCardsCount, setResizeShowCardsCount, setAppendShowCardsCount} from "../../utils/utils";
 
 import "./App.css";
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState(null);
+  const [isConnected, setIsConnected] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState(null);
   const [isMenuPopupOpen, setIsMenuPopupOpen] = React.useState(false);
-  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [typeInfo, setTypeInfo] = React.useState('');
+  const [infoMessage, setInfoMessage] = React.useState('');
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [showCards, setShowCards] = React.useState(0);
   const [showSavedCards, setShowSavedCards] = React.useState(0);
   const [movies, setMovies] = React.useState([]);
+  const navigate = useNavigate();
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowCards(getInitialShowCardsCount(window.innerWidth));
-      setShowSavedCards(getInitialShowCardsCount(window.innerWidth));
-      setMovies(moviesDef);
-      setIsLoaded(true);
-    }, 2000);
-    return () => {
-      clearTimeout(timer);
-    };
-  },[]);
+    mainApi.verifyToken()
+      .then((user) => {
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        setIsLoggedIn(false);
+      })
+      .finally(() => {
+        setIsConnected(true);
+    }); ;
+  }, []);
+  React.useEffect(() => {
+    if(isConnected) {
+      if(isLoggedIn) {
+        loadUserData();
+      } else {
+        clearUserData();
+      }
+    }
+  }, [isConnected, isLoggedIn])
+  const loadUserData = () => {
+    mainApi.getProfile()
+      .then(user => {
+        setCurrentUser(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+  const clearUserData = () => {
+    localStorage.setItem('token', '');
+    setCurrentUser(null);
+  }
   React.useEffect(() => {
     var resizeTimeout;
     const handleResize = () => {
@@ -52,6 +82,21 @@ function App() {
 
     return () => window.removeEventListener('resize', handleResize)
   }, [showCards, showSavedCards])
+  function handleLogin(data) {
+    mainApi.login(data).then((res) => {
+      if (res.token){
+        setInfoMessage('');
+        localStorage.setItem('token', res.token);
+        navigate("/movies");
+        setIsLoggedIn(true);
+      }
+    }).catch((err) => {
+      setInfoMessage(err.message);
+    });
+  }
+  function handleLogout() {
+      setIsLoggedIn(false);
+  }
   const handleCardLike = (likedCard) => {
     setMovies(
       movies.map(
@@ -106,13 +151,12 @@ function App() {
           <Route
             path="movies"
             element={
-              !isLoggedIn ? <Navigate to="/" /> :
+              isConnected && !isLoggedIn ? <Navigate to="/" /> :
               <>
-                <Header isLoggedIn={isLoggedIn} onMenuPopup={handleMenuPopup} />
+                <Header isLoggedIn={true} onMenuPopup={handleMenuPopup} />
                 <Movies
-                  isLoggedIn={isLoggedIn}
                   movies={movies}
-                  isLoaded={isLoaded}
+                  isLoading={isLoading}
                   showCards={showCards}
                   onCardLike={handleCardLike}
                   onMenuPopup={handleMenuPopup}
@@ -125,13 +169,12 @@ function App() {
           <Route
             path="saved-movies"
             element={
-              !isLoggedIn ? <Navigate to="/" /> :
+              isConnected && !isLoggedIn ? <Navigate to="/" /> :
               <>
-                <Header isLoggedIn={isLoggedIn} onMenuPopup={handleMenuPopup} />
+                <Header isLoggedIn={true} onMenuPopup={handleMenuPopup} />
                 <SavedMovies
-                  isLoggedIn={isLoggedIn}
                   movies={movies}
-                  isLoaded={isLoaded}
+                  isLoading={isLoading}
                   showCards={showSavedCards}
                   onCardDelete={handleCardDelete}
                   onMenuPopup={handleMenuPopup}
@@ -144,17 +187,21 @@ function App() {
           <Route
             path="profile"
             element={
-              !isLoggedIn ? <Navigate to="/" /> :
+              isConnected && !isLoggedIn ? <Navigate to="/" /> :
                 <>
-                  <Header isLoggedIn={isLoggedIn} onMenuPopup={handleMenuPopup} />
-                  <Profile onMenuPopup={handleMenuPopup}/>
+                  <Header isLoggedIn={true} onMenuPopup={handleMenuPopup} />
+                  { currentUser && <Profile
+                    onMenuPopup={handleMenuPopup}
+                    onLogout={handleLogout}
+                    />
+                  }
                 </>
             }
           />
           <Route
             path="signup"
             element={
-              isLoggedIn ? <Navigate to="/" /> :
+              isConnected && isLoggedIn ? <Navigate to="/movies" /> :
                 <>
                   <Header/>
                   <Register />
@@ -164,10 +211,13 @@ function App() {
           <Route
             path="signin"
             element={
-              isLoggedIn ? <Navigate to="/" /> :
+              isConnected && isLoggedIn ? <Navigate to="/movies" /> :
                 <>
                   <Header/>
-                  <Login />
+                  <Login
+                    onLogin={handleLogin}
+                    infoMessage={infoMessage}
+                  />
                 </>
             }
           />
@@ -180,6 +230,12 @@ function App() {
         </Routes>
         <MenuPopup
           isOpen={isMenuPopupOpen}
+          onClose={closePopups}
+        />
+        <InfoPopup
+          isOpen={isInfoPopupOpen}
+          typeInfo={typeInfo}
+          infoMessage={infoMessage}
           onClose={closePopups}
         />
       </CurrentUserContext.Provider>

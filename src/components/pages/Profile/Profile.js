@@ -1,86 +1,95 @@
 import React from 'react';
 
+import clsx from 'clsx';
+
+import CurrentUserContext from '../../../contexts/CurrentUserContext';
+import {useFormWithValidation} from '../../../validators/formValidator';
+
 import MEFormInput from "../../controls/MEFormInput/MEFormInput";
-import MEFormError from "../../controls/MEFormError/MEFormError";
 import MEButton from '../../controls/MEButton/MEButton';
 
 import './Profile.css';
 
 function Profile(props) {
-  const [name, setName] = React.useState('Виталий');
-  const [email, setEmail] = React.useState('pochta@yandex.ru');
+  const currentUser = React.useContext(CurrentUserContext);
+  const {
+    onUpdateProfile: handleUpdateProfile,
+    onLogout: handleLogout,
+  } = props;
+  const {values, handleChange, errors, isValid} = useFormWithValidation({
+    name: currentUser.name,
+    email: currentUser.email,
+  });
   const [isEditProfile, SetIsEditProfile] = React.useState(false);
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  }
   function handleProfileEditClick(e) {
+    e.preventDefault();
+
     SetIsEditProfile(true);
   }
-  function handleProfileSubmitClick(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    SetIsEditProfile(false);
+
+    handleUpdateProfile(values);
+  }
+  function handleLogoutClick(e) {
+    handleLogout();
   }
   return (
     <main className="Profile App__main">
       <section className="Profile__content">
-        <h1 className="Profile__title">Привет, Виталий!</h1>
         <form className="Profile__form" name="ProfileForm" noValidate>
+          <h1 className="Profile__title">Привет {currentUser.name}!</h1>
           <MEFormInput
             type="text"
             name="name"
             title="Имя"
             minLength="2"
             maxLength="30"
-            required="true"
-            value={name}
+            required={true}
+            value={values["name"]}
             disabled={isEditProfile ? false : true}
-            onChangeValue={handleChangeName}
+            onChangeValue={handleChange}
+            hasError={errors["name"]}
+            errorMessage={errors["name"]}
           />
           <MEFormInput
             type="text"
             name="email"
             title="E-mail"
-            minLength="2"
-            maxLength="30"
-            required="true"
-            value={email}
+            required={true}
+            value={values["email"]}
             disabled={isEditProfile ? false : true}
-            onChangeValue={handleChangeEmail}
+            onChangeValue={handleChange}
+            hasError={errors["email"]}
+            errorMessage={errors["email"]}
           />
-          <MEFormError
-            hasError="false"
-            errorMessage=""
-          />
+          {
+            isEditProfile ?
+              <div className="Profile__controls">
+                <MEButton
+                  className={clsx('MEButton_type_profile-submit', !isValid ? 'MEButton_disabled' : '')}
+                  type="submit"
+                  title="Сохранить"
+                  onClick={handleSubmit}
+                />
+              </div>
+            :
+              <div className="Profile__controls">
+                <MEButton
+                  className="MEButton_type_profile-edit"
+                  type="button"
+                  title="Редактировать"
+                  onClick={handleProfileEditClick}
+                />
+                <MEButton
+                  className="MEButton_type_profile-signout"
+                  type="button"
+                  title="Выйти из аккаунта"
+                  onClick={handleLogoutClick}
+                />
+              </div>
+          }
         </form>
-
-        {
-          isEditProfile ?
-            <div className="Profile__controls">
-              <MEButton
-                className="MEButton_type_profile-submit"
-                type="submit"
-                title="Сохранить"
-                onClick={handleProfileSubmitClick}
-              />
-            </div>
-          :
-          <div className="Profile__controls">
-            <MEButton
-              className="MEButton_type_profile-edit"
-              type="button"
-              title="Редактировать"
-              onClick={handleProfileEditClick}
-            />
-            <MEButton
-              className="MEButton_type_profile-signout"
-              type="button"
-              title="Выйти из аккаунта"
-            />
-          </div>
-        }
       </section>
     </main>
   );

@@ -8,7 +8,7 @@ import './Movies.css';
 function Movies(props) {
   const {
     movies,
-    isLoaded,
+    isLoading,
     showCards,
     onCardLike: handleCardLike,
     onCardsMore: handleClickCardsMore,
@@ -17,9 +17,9 @@ function Movies(props) {
     <main className="Movies App__main">
       <SearchForm />
       <section className="Movies__content">
-        <MEPreloader isShow={!isLoaded}/>
+        <MEPreloader isShow={isLoading}/>
         {
-          isLoaded && movies && <MoviesCardList
+          movies && <MoviesCardList
             movies={movies}
             showCards={showCards}
             onCardLike={handleCardLike}

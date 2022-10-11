@@ -10,7 +10,7 @@ function MoviesCard(props) {
     moviesCard,
     onCardLike: handleCardLike,
     onCardDelete: handleCardDelete,
-    savedCards = "false",
+    savedCards = false
   } = props;
   const buttonCardClassName = (savedCards) ?
     'MoviesCard__button-like_delete' :
