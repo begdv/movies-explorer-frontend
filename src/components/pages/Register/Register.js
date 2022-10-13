@@ -15,7 +15,7 @@ function Register(props) {
     onRegister: handleRegister,
   } = props;
   const {values, handleChange, errors, isValid, resetForm} = useFormWithValidation();
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     handleRegister(values);
@@ -36,7 +36,6 @@ function Register(props) {
             required={true}
             value={values["name"]}
             onChangeValue={handleChange}
-            hasError={errors["name"]}
             errorMessage={errors["name"]}
           />
           <MEFormInput
@@ -46,7 +45,6 @@ function Register(props) {
             required={true}
             value={values["email"]}
             onChangeValue={handleChange}
-            hasError={errors["email"]}
             errorMessage={errors["email"]}
           />
           <MEFormInput
@@ -58,7 +56,6 @@ function Register(props) {
             required={true}
             value={values["password"]}
             onChangeValue={handleChange}
-            hasError={errors["password"]}
             errorMessage={errors["password"]}
           />
           <div className="Register__controls">

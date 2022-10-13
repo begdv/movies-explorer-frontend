@@ -21,17 +21,17 @@ function Profile(props) {
     email: currentUser.email,
   });
   const [isEditProfile, SetIsEditProfile] = React.useState(false);
-  function handleProfileEditClick(e) {
+  const handleProfileEditClick= (e) => {
     e.preventDefault();
 
     SetIsEditProfile(true);
   }
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     handleUpdateProfile(values);
   }
-  function handleLogoutClick(e) {
+  const handleLogoutClick = (e) => {
     handleLogout();
   }
   return (
@@ -49,7 +49,6 @@ function Profile(props) {
             value={values["name"]}
             disabled={isEditProfile ? false : true}
             onChangeValue={handleChange}
-            hasError={errors["name"]}
             errorMessage={errors["name"]}
           />
           <MEFormInput
@@ -60,7 +59,6 @@ function Profile(props) {
             value={values["email"]}
             disabled={isEditProfile ? false : true}
             onChangeValue={handleChange}
-            hasError={errors["email"]}
             errorMessage={errors["email"]}
           />
           {

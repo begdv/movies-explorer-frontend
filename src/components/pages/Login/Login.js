@@ -17,7 +17,7 @@ function Login(props) {
     infoMessage,
   } = props;
   const {values, handleChange, errors, isValid} = useFormWithValidation();
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     handleLogin(values);
@@ -34,7 +34,6 @@ function Login(props) {
             required={true}
             value={values["email"]}
             onChangeValue={handleChange}
-            hasError={errors["email"]}
             errorMessage={errors["email"]}
           />
           <MEFormInput
@@ -44,12 +43,10 @@ function Login(props) {
             required={true}
             value={values["password"]}
             onChangeValue={handleChange}
-            hasError={errors["password"]}
             errorMessage={errors["password"]}
           />
           <div className="Login__controls">
             <MEFormError
-              hasError={infoMessage}
               errorMessage={infoMessage}
               className="MEFormError_type_main"
             />

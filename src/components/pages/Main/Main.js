@@ -7,7 +7,7 @@ import AboutMe from "./AboutMe/AboutMe";
 
 function Main(props) {
   return (
-    <main className="Main App__main">
+    <main className="Main">
       <Promo/>
       <AboutProject/>
       <Techs/>

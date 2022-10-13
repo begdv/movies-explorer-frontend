@@ -17,7 +17,6 @@ function MEFormInput(props) {
     required,
     value,
     disabled,
-    hasError = false,
     errorMessage = "",
     onChangeValue: handleChangeValue,
   } = props;
@@ -45,7 +44,7 @@ function MEFormInput(props) {
           className={
             clsx('MEFormInput__input', (route === 'profile') ?
               'MEFormInput__input_page_profile' : 'MEFormInput__input_page_signing',
-              hasError ? 'MEFormInput__input_error' : '')
+              errorMessage ? 'MEFormInput__input_error' : '')
           }
           type={type}
           name={name}
@@ -59,7 +58,6 @@ function MEFormInput(props) {
         />
       </div>
       <MEFormError
-        hasError={hasError}
         errorMessage={errorMessage}
         className="MEFormError_type_input"
       />

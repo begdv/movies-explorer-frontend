@@ -43,6 +43,7 @@
   background: #FAFAFA;
   border: none;
   outline: none;
+  appearance: none;
   -webkit-appearance: none;
   border-radius: 4px;
 }

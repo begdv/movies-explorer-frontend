@@ -1,17 +1,13 @@
-import {NOMOREPARTIES_URL} from '../utils/const.js';
+import {NOMOREPARTIES_API} from '../utils/const.js';
 
 class MoviesApi {
   getMovies() {
-    return fetch(`${NOMOREPARTIES_URL}`, {
+    return fetch(`${NOMOREPARTIES_API}`, {
       headers: {"content-type": "application/json"},
     })
       .then((res) => {
         return this._processResult(res);
       });
-  }
-   _makeHeader(){
-    const token = localStorage.getItem('token');
-    return {"Authorization": `Bearer ${token}`, "content-type": "application/json"};
   }
   _processResult(res) {
     if (res.ok) {

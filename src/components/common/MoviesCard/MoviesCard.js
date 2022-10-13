@@ -29,12 +29,12 @@ function MoviesCard(props) {
       >
         <img
           className="MoviesCard__image"
-          src={`${NOMOREPARTIES_URL}${moviesCard.image.url}`}
+          src={`${NOMOREPARTIES_URL}${moviesCard.image}`}
           alt={moviesCard.nameRU}
         />
       </a>
       <div className="MoviesCard__info">
-        <p className="MoviesCard__name">{moviesCard.nameRU}</p>
+        <p className="MoviesCard__name">{moviesCard.name}</p>
         <button
           type="button"
           className={clsx('MoviesCard__button-like', buttonCardClassName)}

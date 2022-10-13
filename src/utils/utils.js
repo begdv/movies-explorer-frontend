@@ -24,3 +24,12 @@ export const setResizeShowCardsCount = (showCards, width) => {
 export const setAppendShowCardsCount = (width) => {
   return (width < 1280) ? 2 : 4;
 }
+
+export const getMovieFilter = (movie, filterMovie) => {
+  let result = (movie.nameRU && movie.nameRU.includes(filterMovie.movie))
+  || (movie.nameEN &&   movie.nameEN.includes(filterMovie.movie));
+  if(filterMovie.shortFilm){
+    result = result && (movie.duration <= 40)
+  }
+  return result;
+}

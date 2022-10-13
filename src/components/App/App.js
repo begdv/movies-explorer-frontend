@@ -16,6 +16,9 @@ import NotFound from "../pages/NotFound/NotFound";
 import MenuPopup from "../popups/MenuPopup/MenuPopup";
 import InfoPopup from "../popups/InfoPopup/InfoPopup";
 
+import {DEFAULT_FILTER_MOVIE, LOAD_MOVIES_ERROR} from '../../utils/const';
+import {getMovieFilter} from '../../utils/utils';
+
 import {getInitialShowCardsCount, setResizeShowCardsCount, setAppendShowCardsCount} from "../../utils/utils";
 
 import "./App.css";
@@ -29,9 +32,15 @@ function App() {
   const [infoMessage, setInfoMessage] = React.useState('');
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [showCards, setShowCards] = React.useState(0);
-  const [showSavedCards, setShowSavedCards] = React.useState(0);
+  const [showCards, setShowCards] = React.useState(getInitialShowCardsCount(window.innerWidth));
+  const [showSavedCards, setShowSavedCards] = React.useState(getInitialShowCardsCount(window.innerWidth));
   const [movies, setMovies] = React.useState([]);
+  const [filterMovie, setFilterMovie] = React.useState(DEFAULT_FILTER_MOVIE);
+  const [filteredMovies, setFilteredMovies] = React.useState([]);
+  const [filterSavedMovie, setFilterSavedMovie] = React.useState(DEFAULT_FILTER_MOVIE);
+  const [savedMovies, setSavedMovies] = React.useState([]);
+
+
   const navigate = useNavigate();
   React.useEffect(() => {
     mainApi.verifyToken()
@@ -48,25 +57,24 @@ function App() {
   React.useEffect(() => {
     if(isConnected) {
       if(isLoggedIn) {
-        loadUserData();
+        const storageFilterMovie = localStorage.getItem('filterMovie');
+        setFilterMovie(storageFilterMovie ? JSON.parse(storageFilterMovie) : DEFAULT_FILTER_MOVIE);
+        const storageMovies = localStorage.getItem('movies');
+        setMovies(storageMovies ? JSON.parse(storageMovies) : []);
+        mainApi.getProfile()
+          .then(user => {
+            setCurrentUser(user);
+          })
+          .catch((err) => {
+            setInfoMessage(err.message);
+          })
       } else {
-        clearUserData();
+        localStorage.setItem('token', '');
+        localStorage.setItem('filterMovie', JSON.stringify({movie: '', shortFilm: false}));
+        setCurrentUser(null);
       }
     }
   }, [isConnected, isLoggedIn])
-  const loadUserData = () => {
-    mainApi.getProfile()
-      .then(user => {
-        setCurrentUser(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-  const clearUserData = () => {
-    localStorage.setItem('token', '');
-    setCurrentUser(null);
-  }
   React.useEffect(() => {
     var resizeTimeout;
     const handleResize = () => {
@@ -74,15 +82,34 @@ function App() {
         resizeTimeout = setTimeout(function() {
           resizeTimeout = null;
           setShowCards(setResizeShowCardsCount(showCards, window.innerWidth));
-          setShowSavedCards(getInitialShowCardsCount(showSavedCards, window.innerWidth));
+          setShowSavedCards(setResizeShowCardsCount(showSavedCards, window.innerWidth));
          }, 500);
       }
     }
     window.addEventListener('resize', handleResize)
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [showCards, showSavedCards])
-  function handleLogin(data) {
+  }, [showCards, showSavedCards]);
+  React.useEffect(() => {
+    setFilteredMovies(movies.reduce((result, movie) => {
+      if(getMovieFilter(movie, filterMovie)){
+        result.push({
+          id : movie.id,
+          country : movie.country,
+          director : movie.director,
+          year: movie.year,
+          description :movie.description,
+          thumbnail : movie.image && movie.image.formats.thumbnail,
+          name: movie.nameRU ? movie.nameRU : movie.nameEN,
+          trailerLink : movie.trailerLink ? movie.trailerLink : '',
+          image : movie.image && movie.image.url ? movie.image.url : '',
+          duration : movie.duration ? movie.duration : ''
+        })
+      }
+      return result;
+    }, []));
+  }, [movies, filterMovie]);
+  const handleLogin = (data) => {
     mainApi.login(data).then((res) => {
       if (res.token){
         setInfoMessage('');
@@ -94,7 +121,7 @@ function App() {
       setInfoMessage(err.message);
     });
   }
-  function handleLogout() {
+  const handleLogout = () => {
       setIsLoggedIn(false);
   }
   const handleCardLike = (likedCard) => {
@@ -124,11 +151,34 @@ function App() {
   const handleMenuPopup = () => {
     setIsMenuPopupOpen(true);
   }
-  const handleClickCardsMore = () => {
+  const handleCardsMore = () => {
     setShowCards(showCards + setAppendShowCardsCount(window.innerWidth));
   }
-  const handleClickSaveCardsMore = () => {
+  const handleSavedCardsMore = () => {
     setShowSavedCards(showSavedCards + setAppendShowCardsCount(window.innerWidth));
+  }
+  const handleFilterMovie = (filterValue) => {
+    setFilterMovie(filterValue);
+    localStorage.setItem('filterMovie', JSON.stringify(filterValue));
+    if(!movies.length){
+      setIsLoading(true);
+      moviesApi.getMovies()
+        .then(data => {
+          setMovies(data);
+          localStorage.setItem('movies', JSON.stringify(data));
+          setInfoMessage('');
+        })
+        .catch((err) => {
+          setInfoMessage(LOAD_MOVIES_ERROR);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        })
+    }
+  }
+  const handleFilterSavedMovie = (filterValue) => {
+    setFilterSavedMovie(filterValue);
+    localStorage.setItem('filterSavedMovie', JSON.stringify(filterValue));
   }
   const closePopups = () => {
     setIsMenuPopupOpen(false);
@@ -154,14 +204,18 @@ function App() {
               isConnected && !isLoggedIn ? <Navigate to="/" /> :
               <>
                 <Header isLoggedIn={true} onMenuPopup={handleMenuPopup} />
-                <Movies
-                  movies={movies}
-                  isLoading={isLoading}
-                  showCards={showCards}
-                  onCardLike={handleCardLike}
-                  onMenuPopup={handleMenuPopup}
-                  onCardsMore={handleClickCardsMore}
-                />
+                {
+                  currentUser && <Movies
+                    filterMovie={filterMovie}
+                    movies={filteredMovies}
+                    isLoading={isLoading}
+                    showCards={showCards}
+                    errorMessage={infoMessage}
+                    onFilterMovie={handleFilterMovie}
+                    onCardLike={handleCardLike}
+                    onCardsMore={handleCardsMore}
+                  />
+                }
                 <Footer/>
               </>
             }
@@ -172,14 +226,18 @@ function App() {
               isConnected && !isLoggedIn ? <Navigate to="/" /> :
               <>
                 <Header isLoggedIn={true} onMenuPopup={handleMenuPopup} />
-                <SavedMovies
-                  movies={movies}
-                  isLoading={isLoading}
-                  showCards={showSavedCards}
-                  onCardDelete={handleCardDelete}
-                  onMenuPopup={handleMenuPopup}
-                  onCardsMore={handleClickSaveCardsMore}
-                />
+                {
+                  currentUser && <SavedMovies
+                    filterSavedMovie={filterSavedMovie}
+                    savedMovies={savedMovies}
+                    isLoading={isLoading}
+                    errorMessage={infoMessage}
+                    showSavedCards={showSavedCards}
+                    onFilterSavedMovie={handleFilterSavedMovie}
+                    onCardDelete={handleCardDelete}
+                    onSavedCardsMore={handleSavedCardsMore}
+                  />
+                }
                 <Footer/>
               </>
             }
@@ -190,7 +248,8 @@ function App() {
               isConnected && !isLoggedIn ? <Navigate to="/" /> :
                 <>
                   <Header isLoggedIn={true} onMenuPopup={handleMenuPopup} />
-                  { currentUser && <Profile
+                  {
+                    currentUser && <Profile
                     onMenuPopup={handleMenuPopup}
                     onLogout={handleLogout}
                     />

@@ -25,3 +25,30 @@
   line-height: 13px;
   text-align: center;
 }
+
+.MEFormError_type_filter{
+  font-size: 11px;
+  line-height: 18px;
+  text-align: right;
+  height: 16px;
+  margin-left: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .MEFormError_type_filter{
+    font-size: 13px;
+  }
+}
+
+.MEFormError_type_movie{
+  font-size: 11px;
+  line-height: 18px;
+  text-align: left;
+  height: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .MEFormError_type_filter{
+    font-size: 13px;
+  }
+}

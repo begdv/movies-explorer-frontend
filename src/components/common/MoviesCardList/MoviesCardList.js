@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom';
+
 import clsx from 'clsx'
 
 import MEButton from '../../controls/MEButton/MEButton';
@@ -7,6 +9,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css';
 
 function MoviesCardList(props) {
+  const route = useLocation().pathname.replace('/','');
   const {
     movies,
     showCards,
@@ -28,8 +31,8 @@ function MoviesCardList(props) {
               (index < showCards)
               && (!savedCards || (savedCards && moviesCard.liked))
               && <MoviesCard
+                key={moviesCard.id}
                 savedCards={savedCards}
-                key={moviesCard._id}
                 moviesCard={moviesCard}
                 onCardLike={handleCardLike}
                 onCardDelete={handleCardDelete}
@@ -39,12 +42,14 @@ function MoviesCardList(props) {
         :
           <p className="MoviesCardList__notfound">Ничего не найдено</p>
       }
-      <MEButton
+      { route === 'movies' &&
+        <MEButton
           className={clsx('MEButton_type_films-more', (showCards >= cntMovies) ? 'MEButton_hidden' : '')}
           type="button"
           title="Еще"
           onClick={handleClickCardsMore}
         />
+      }
     </section>
 
   );

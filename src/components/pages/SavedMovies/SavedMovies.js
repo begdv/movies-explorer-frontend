@@ -1,25 +1,37 @@
 import SearchForm from "../../common/SearchForm/SearchForm";
 import MoviesCardList from "../../common/MoviesCardList/MoviesCardList";
+import MEFormError from "../../controls/MEFormError/MEFormError";
 
+import MEPreloader from "../../../components/controls/MEPreloader/MEPreloader";
 import './SavedMovies.css';
 
 function SavedMovies(props) {
   const {
-    movies,
-    showCards,
+    filterSavedMovie,
+    savedMovies,
+    isLoading,
+    showSavedCards,
+    errorMessage,
     onCardDelete: handleCardDelete,
-    onCardsMore: handleClickCardsMore,
+    onFilterSavedMovie: handleFilterSavedMovie,
   } = props;
   return (
     <main className="SavedMovies App__main">
-      <SearchForm />
+      <SearchForm
+        filterMovie={filterSavedMovie}
+        onFilterSavedMovie={handleFilterSavedMovie}
+      />
+      <MEFormError
+        errorMessage={errorMessage}
+        className="MEFormError_type_movie"
+      />
+      <MEPreloader isShow={isLoading}/>
       <section className="SavedMovies__content">
         {
-          movies && <MoviesCardList
-            movies={movies}
-            showCards={showCards}
+          savedMovies && <MoviesCardList
+            movies={savedMovies}
+            showCards={showSavedCards}
             onCardDelete={handleCardDelete}
-            onCardsMore={handleClickCardsMore}
             savedCards={true}
           />
         }

@@ -1,8 +1,8 @@
-import {BACKEND_URL, } from '../utils/const.js';
+import {BACKEND_API, } from '../utils/const.js';
 
 class MainApi {
   verifyToken() {
-    return fetch(`${BACKEND_URL}/users/me`, {
+    return fetch(`${BACKEND_API}/users/me`, {
       method: 'GET',
       headers: this._makeHeader(),
     })
@@ -11,7 +11,7 @@ class MainApi {
       });
   }
   register({email, password, name}) {
-    return fetch(`${BACKEND_URL}/signup`, {
+    return fetch(`${BACKEND_API}/signup`, {
       method: 'POST',
       headers: {"content-type": "application/json"},
       body: JSON.stringify({
@@ -26,7 +26,7 @@ class MainApi {
   }
 
   login({email, password}) {
-    return fetch(`${BACKEND_URL}/signin`, {
+    return fetch(`${BACKEND_API}/signin`, {
       method: 'POST',
       headers: {"content-type": "application/json"},
       body: JSON.stringify({
@@ -39,7 +39,7 @@ class MainApi {
       });
   }
   getProfile() {
-    return fetch(`${BACKEND_URL}/users/me`, {
+    return fetch(`${BACKEND_API}/users/me`, {
       headers: this._makeHeader(),
     })
       .then((res) => {
@@ -47,7 +47,7 @@ class MainApi {
       });
   }
   saveProfile({email, name}) {
-    return fetch(`${BACKEND_URL}/me`, {
+    return fetch(`${BACKEND_API}/me`, {
       method: 'PATCH',
       headers: this._makeHeader(),
       body: JSON.stringify({
@@ -60,7 +60,7 @@ class MainApi {
       });
   }
   getSavedMovies() {
-    return fetch(`${BACKEND_URL}/movies`, {
+    return fetch(`${BACKEND_API}/movies`, {
       headers: this._makeHeader(),
     })
       .then((res) => {
@@ -68,7 +68,7 @@ class MainApi {
       });
   }
   saveMovie(movieData) {
-    return fetch(`${BACKEND_URL}/movies`, {
+    return fetch(`${BACKEND_API}/movies`, {
       method: 'POST',
       headers: this._makeHeader(),
       body: JSON.stringify(movieData)
@@ -78,7 +78,7 @@ class MainApi {
       });
   }
   removeMovie(moviesId) {
-    return fetch(`${BACKEND_URL}movies/${moviesId}`, {
+    return fetch(`${BACKEND_API}movies/${moviesId}`, {
       method: 'DELETE',
       headers: this._makeHeader(),
     })
