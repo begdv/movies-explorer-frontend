@@ -26,7 +26,7 @@ function Movies(props) {
         onFilterMovie={handleFilterMovie}
         required={true}
       />
-      <section className="Movies__content">{movies.length}
+      <section className="Movies__content">
         <MEFormError
           errorMessage={errorMessage}
           className="MEFormError_type_movie"

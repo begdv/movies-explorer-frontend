@@ -100,31 +100,6 @@ function App() {
     return () => window.removeEventListener('resize', handleResize)
   }, [showCards]);
 
-  React.useEffect(() => {
-    if(isLoggedIn) {
-      setFilteredMovies(movies.reduce((result, movie) => {
-        if(getMovieFilter(movie, filterMovie)){
-          result.push({
-            id : movie.id,
-            country : movie.country,
-            director : movie.director,
-            year: movie.year,
-            description :movie.description,
-            thumbnail : movie.image.formats.thumbnail.url && (NOMOREPARTIES_URL + movie.image.formats.thumbnail.url),
-            nameRU: movie.nameRU ? movie.nameRU : '',
-            nameEN: movie.nameEN ? movie.nameEN : '',
-            trailerLink : movie.trailerLink ? movie.trailerLink : '',
-            image : movie.image.url && movie.image.url ? (NOMOREPARTIES_URL + movie.image.url) : '',
-            duration : movie.duration ? movie.duration : '',
-            saved: savedMovies.some((movieSaved) => movieSaved.movieId === movie.id),
-          })
-        }
-        return result;
-      }, []));
-      localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
-    }
-  }, [isLoggedIn, movies, savedMovies, filterMovie]);
-
   const loadSavedMovie = () => {
     mainApi.getSavedMovies()
     .then(movies => {
@@ -219,14 +194,12 @@ function App() {
   };
 
   async function handleFilterMovie (filterValue) {
-    setFilterMovie(filterValue);
-    localStorage.setItem('filterMovie', JSON.stringify(filterValue));
     setInfoMessage('');
     if(!movies.length){
       loadAllMovies();
     }
-    setFilteredMovies(movies.reduce((result, movie) => {
-      if(getMovieFilter(movie, filterMovie)){
+    const newFilteredMovies = movies.reduce((result, movie) => {
+      if(getMovieFilter(movie, filterValue)){
         result.push({
           id : movie.id,
           country : movie.country,
@@ -243,8 +216,11 @@ function App() {
         })
       }
       return result;
-    }, []));
-    localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
+    }, []);
+    localStorage.setItem('filterMovie', JSON.stringify(filterValue));
+    localStorage.setItem('filteredMovies', JSON.stringify(newFilteredMovies));
+    setFilterMovie(filterValue);
+    setFilteredMovies(newFilteredMovies);
   };
 
   function loadAllMovies(){
