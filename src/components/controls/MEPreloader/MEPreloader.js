@@ -5,6 +5,7 @@ import './MEPreloader.css'
 
 const MEPreloader = (props) => {
   const { isShow } = props;
+  
     return (
         <div className={clsx('MEPreloader', isShow ? 'MEPreloader_show' : '')}>
             <div className="MEPreloader__container">

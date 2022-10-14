@@ -18,13 +18,15 @@ function Movies(props) {
     onCardsMore: handleClickCardsMore,
     onFilterMovie: handleFilterMovie,
   } = props;
+
   return (
     <main className="Movies">
       <SearchForm
         filterMovie={filterMovie}
         onFilterMovie={handleFilterMovie}
+        required={true}
       />
-      <section className="Movies__content">
+      <section className="Movies__content">{movies.length}
         <MEFormError
           errorMessage={errorMessage}
           className="MEFormError_type_movie"

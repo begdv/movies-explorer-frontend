@@ -7,11 +7,14 @@ function MEFilterSwitch(props) {
     switchValue,
     onSwitchChange: handleSwitchChange,
   } = props;
+
   const [checked, setChecked] = React.useState(switchValue);
+
   const handleChange = (e) => {
 		setChecked(e.target.checked);
     handleSwitchChange(e.target.checked)
-	}
+	};
+
   return (
     <label className="MEFilterSwitch">
       <input

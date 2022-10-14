@@ -9,6 +9,7 @@ function MEMenuPopupButton(props) {
   const {
     onClick: handleMenuPopupButtonClick,
   } = props;
+
   return (
     <button
       type="button"

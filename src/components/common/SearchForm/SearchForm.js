@@ -11,6 +11,7 @@ import './SearchForm.css';
 function SearchForm(props) {
   const {
     filterMovie,
+    required,
     onFilterMovie: handleFilterMovie,
   } = props;
 
@@ -19,11 +20,12 @@ function SearchForm(props) {
 
   const handleChangeFilterMovie = (e) => {
     setMovieValue(e.target.value.trim());
-  }
+  };
+
   const handleSubmitFilterMovie = (e) => {
     e.preventDefault();
 
-    if(movieValue === ''){
+    if((movieValue === '') && required){
       setFilterError(FILTER_MOVIE_ERROR);
       return;
     }
@@ -31,10 +33,12 @@ function SearchForm(props) {
     setFilterError('');
 
     handleFilterMovie({...filterMovie, movie : movieValue});
-  }
+  };
+
   const handleSwitchChange = (switchValue) => {
     handleFilterMovie({...filterMovie, shortFilm : switchValue});
-  }
+  };
+
   return (
     <form className="SearchForm" name="search-movie"  onSubmit={handleSubmitFilterMovie} noValidate>
       <div className="SearchForm__input">
@@ -44,7 +48,7 @@ function SearchForm(props) {
           type="text"
           name="movie"
           size="1"
-          required
+          required={required}
           onChange={handleChangeFilterMovie}
           value={movieValue}
         />

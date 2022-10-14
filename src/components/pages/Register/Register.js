@@ -3,6 +3,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 import {useFormWithValidation} from '../../../validators/formValidator';
+import MEFormError from "../../controls/MEFormError/MEFormError";
 
 import MEFormInput from "../../controls/MEFormInput/MEFormInput";
 import MEButton from '../../controls/MEButton/MEButton';
@@ -13,14 +14,17 @@ import './Register.css';
 function Register(props) {
   const {
     onRegister: handleRegister,
+    infoMessage,
   } = props;
-  const {values, handleChange, errors, isValid, resetForm} = useFormWithValidation();
+
+  const {values, handleChange, errors, isValid} = useFormWithValidation();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     handleRegister(values);
-    resetForm();
-  }
+  };
+
   return (
     <main className="Register App__main">
       <section className="Register__content">
@@ -39,7 +43,7 @@ function Register(props) {
             errorMessage={errors["name"]}
           />
           <MEFormInput
-            type="text"
+            type="email"
             name="email"
             title="E-mail"
             required={true}
@@ -59,8 +63,13 @@ function Register(props) {
             errorMessage={errors["password"]}
           />
           <div className="Register__controls">
+            <MEFormError
+              errorMessage={infoMessage}
+              className="MEFormError_type_main"
+            />
             <MEButton
               className={clsx('MEButton_type_profile-submit', !isValid ? 'MEButton_disabled' : '')}
+              disabled={!isValid}
               type="submit"
               title="Зарегистрироваться"
             />

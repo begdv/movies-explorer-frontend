@@ -26,10 +26,11 @@ export const setAppendShowCardsCount = (width) => {
 }
 
 export const getMovieFilter = (movie, filterMovie) => {
-  let result = (movie.nameRU && movie.nameRU.includes(filterMovie.movie))
-  || (movie.nameEN &&   movie.nameEN.includes(filterMovie.movie));
+  const regexp = new RegExp(filterMovie.movie, 'i');
+  let result = (movie.nameRU && movie.nameRU.search(regexp))
+  || (movie.nameEN &&   movie.nameEN.search(regexp));
   if(filterMovie.shortFilm){
     result = result && (movie.duration <= 40)
   }
-  return result;
+  return (result !== -1);
 }

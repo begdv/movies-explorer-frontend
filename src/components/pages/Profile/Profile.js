@@ -12,28 +12,39 @@ import './Profile.css';
 
 function Profile(props) {
   const currentUser = React.useContext(CurrentUserContext);
+
   const {
     onUpdateProfile: handleUpdateProfile,
     onLogout: handleLogout,
   } = props;
+
   const {values, handleChange, errors, isValid} = useFormWithValidation({
     name: currentUser.name,
     email: currentUser.email,
   });
+
   const [isEditProfile, SetIsEditProfile] = React.useState(false);
+
   const handleProfileEditClick= (e) => {
     e.preventDefault();
 
     SetIsEditProfile(true);
-  }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    SetIsEditProfile(false);
     handleUpdateProfile(values);
-  }
+  };
+
   const handleLogoutClick = (e) => {
     handleLogout();
-  }
+  };
+
+  const disabledSave = !isValid ||
+    ((currentUser.name === values.name) && (currentUser.email === values.email));
+
   return (
     <main className="Profile App__main">
       <section className="Profile__content">
@@ -65,8 +76,9 @@ function Profile(props) {
             isEditProfile ?
               <div className="Profile__controls">
                 <MEButton
-                  className={clsx('MEButton_type_profile-submit', !isValid ? 'MEButton_disabled' : '')}
+                  className={clsx('MEButton_type_profile-submit', disabledSave ? 'MEButton_disabled' : '')}
                   type="submit"
+                  disabled={!isValid}
                   title="Сохранить"
                   onClick={handleSubmit}
                 />

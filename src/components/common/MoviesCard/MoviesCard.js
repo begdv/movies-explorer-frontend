@@ -13,13 +13,16 @@ function MoviesCard(props) {
     onMovieSave: handleMovieSave,
     onMovieDelete: handleMovieDelete,
   } = props;
+
   const buttonCardClassName = (route === 'saved-movies') ?
     'MoviesCard__button-like_delete' :
     ((moviesCard.saved) ? 'MoviesCard__button-like_liked' : '');
+
   const handleCardClick = (e) => {
     (route === 'saved-movies') ?  handleMovieDelete(moviesCard) : (
       (e.target.className === 'MoviesCard__button-like') ? handleMovieSave(moviesCard) : handleMovieDelete(moviesCard));
-  }
+  };
+
   return (
     <li className="MoviesCard">
       <a

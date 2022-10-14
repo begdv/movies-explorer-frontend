@@ -9,6 +9,7 @@ function Navigation(props) {
   const {
     onMenuPopup: handleMenuPopupButtonClick,
   } = props;
+  
   return (
     <nav className="Navigation">
       <MELogo />

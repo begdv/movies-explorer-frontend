@@ -14,6 +14,7 @@ function MEProfileButton(props) {
   const {
     onClick: handleMenuPopupClick,
   } = props;
+
   return (
     <NavLink
       className={clsx('MEProfileButton', className, (route === '/') ? 'MEProfileButton_page_main' : '')}

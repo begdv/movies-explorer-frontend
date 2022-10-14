@@ -10,6 +10,7 @@ function MEButton(props) {
     disabled,
     onClick: handleButtonClick,
   } = props;
+
   return (
     <button
       className={clsx('MEButton', className)}

@@ -17,13 +17,15 @@ function MoviesCardList(props) {
     onMovieDelete: handleMovieDelete,
     onCardsMore: handleClickCardsMore,
   } = props;
+  
   return (
     <section className="MoviesCardList">
       {
         (movies.length > 0) ?
           <ul className="MoviesCardList__films">
             {movies && movies.map((moviesCard, index) =>
-              (((route === 'movies') && (index < showCards)) || (route === 'saved-movies'))
+              (((route === 'movies') && (index < showCards)) ||
+                ((route === 'saved-movies') && !moviesCard.filtered))
               && <MoviesCard
                 key={moviesCard.id}
                 moviesCard={moviesCard}

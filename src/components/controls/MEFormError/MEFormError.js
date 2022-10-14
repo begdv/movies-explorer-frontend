@@ -7,6 +7,7 @@ function MEFormError(props) {
     errorMessage = '',
     className,
   } = props;
+
   return (
     <span
       className={clsx('MEFormError', className, errorMessage ? 'MEFormError_show' : '')}

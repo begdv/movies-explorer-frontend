@@ -16,12 +16,15 @@ function Login(props) {
     onLogin: handleLogin,
     infoMessage,
   } = props;
+
   const {values, handleChange, errors, isValid} = useFormWithValidation();
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
     handleLogin(values);
-  }
+  };
+
   return (
     <main className="Login App__main">
       <section className="Login__content">

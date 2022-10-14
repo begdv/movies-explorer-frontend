@@ -47,7 +47,7 @@ class MainApi {
       });
   }
   saveProfile({email, name}) {
-    return fetch(`${BACKEND_API}/me`, {
+    return fetch(`${BACKEND_API}/users/me`, {
       method: 'PATCH',
       headers: this._makeHeader(),
       body: JSON.stringify({

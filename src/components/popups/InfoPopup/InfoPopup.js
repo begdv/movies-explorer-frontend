@@ -13,13 +13,16 @@ function InfoPopup(props) {
     infoMessage,
     onClose: handleClosePopupClick,
   } = props;
+
   const typeInfoIcon =  typeInfo ? (typeInfo === 'ok' ? okIcon : errorIcon) : null;
+
   return (
     <Popup
       isOpen={isOpen}
       onClose={handleClosePopupClick}
       popupClassName="Popup_type_tooltip"
       popupContainerClassName="Popup__container_type_tooltip"
+      popupButtonClassName="Popup__button-close_type_tooltip"
     >
       <div className="InfoPopup">
         <img className="InfoPopup__icon" src={typeInfoIcon} alt={infoMessage}/>

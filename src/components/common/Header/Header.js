@@ -17,20 +17,23 @@ function Header(props) {
     isLoggedIn = false,
     onMenuPopup: handleMenuPopup,
   } = props;
+
   const HeaderLoggedIn = () => {
     return (
       <header className={clsx('Header', (route === '/') ? 'Header_page_main' : '')}>
         <Navigation onMenuPopup={handleMenuPopup}/>
       </header>
     )
-  }
+  };
+
   const HeaderSignin = () => {
     return (
       <header className={clsx('Header', 'Header_page_signin')}>
         <MELogo className="MELogo_page_signing"/>
       </header>
     )
-  }
+  };
+
   const HeaderLanding = () => {
     return (
       <header className={clsx('Header', 'Header_page_main')}>
@@ -41,7 +44,8 @@ function Header(props) {
         </div>
       </header>
     )
-  }
+  };
+
   return (
     isLoggedIn ? <HeaderLoggedIn /> : (
       (route === '/') ? <HeaderLanding /> : <HeaderSignin />

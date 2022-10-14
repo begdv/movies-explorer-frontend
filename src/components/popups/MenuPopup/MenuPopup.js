@@ -10,12 +10,14 @@ function MenuPopup(props) {
     isOpen,
     onClose: handleClosePopupClick,
   } = props;
+
   return (
     <Popup
       isOpen={isOpen}
       onClose={handleClosePopupClick}
       popupClassName="Popup_type_menu"
       popupContainerClassName="Popup__container_type_menu"
+      popupButtonClassName="Popup__button-close_type_menu"
     >
       <div className="MenuPopup">
         <ul className="MenuPopup__navlinks">
