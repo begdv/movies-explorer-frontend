@@ -78,7 +78,7 @@ class MainApi {
       });
   }
   removeMovie(moviesId) {
-    return fetch(`${BACKEND_API}movies/${moviesId}`, {
+    return fetch(`${BACKEND_API}/movies/${moviesId}`, {
       method: 'DELETE',
       headers: this._makeHeader(),
     })

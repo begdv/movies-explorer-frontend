@@ -10,9 +10,8 @@ function SavedMovies(props) {
     filterSavedMovie,
     savedMovies,
     isLoading,
-    showSavedCards,
     errorMessage,
-    onCardDelete: handleCardDelete,
+    onMovieDelete: handleMovieDelete,
     onFilterSavedMovie: handleFilterSavedMovie,
   } = props;
   return (
@@ -30,9 +29,7 @@ function SavedMovies(props) {
         {
           savedMovies && <MoviesCardList
             movies={savedMovies}
-            showCards={showSavedCards}
-            onCardDelete={handleCardDelete}
-            savedCards={true}
+            onMovieDelete={handleMovieDelete}
           />
         }
       </section>

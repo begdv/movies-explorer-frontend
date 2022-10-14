@@ -16,7 +16,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import MenuPopup from "../popups/MenuPopup/MenuPopup";
 import InfoPopup from "../popups/InfoPopup/InfoPopup";
 
-import {DEFAULT_FILTER_MOVIE, LOAD_MOVIES_ERROR} from '../../utils/const';
+import {DEFAULT_FILTER_MOVIE, LOAD_MOVIES_ERROR, NOMOREPARTIES_URL} from '../../utils/const';
 import {getMovieFilter} from '../../utils/utils';
 
 import {getInitialShowCardsCount, setResizeShowCardsCount, setAppendShowCardsCount} from "../../utils/utils";
@@ -33,7 +33,6 @@ function App() {
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [showCards, setShowCards] = React.useState(getInitialShowCardsCount(window.innerWidth));
-  const [showSavedCards, setShowSavedCards] = React.useState(getInitialShowCardsCount(window.innerWidth));
   const [movies, setMovies] = React.useState([]);
   const [filterMovie, setFilterMovie] = React.useState(DEFAULT_FILTER_MOVIE);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
@@ -61,16 +60,28 @@ function App() {
         setFilterMovie(storageFilterMovie ? JSON.parse(storageFilterMovie) : DEFAULT_FILTER_MOVIE);
         const storageMovies = localStorage.getItem('movies');
         setMovies(storageMovies ? JSON.parse(storageMovies) : []);
+        const storageFilterSavedMovie = localStorage.getItem('filterSavedMovie');
+        setFilterSavedMovie(storageFilterSavedMovie ? JSON.parse(storageFilterSavedMovie) : DEFAULT_FILTER_MOVIE);
         mainApi.getProfile()
           .then(user => {
             setCurrentUser(user);
-          })
+            mainApi.getSavedMovies()
+              .then(movies => {
+                setSavedMovies(movies);
+              })
+              .catch((err) => {
+                return Promise.reject(err);
+              });
+            })
           .catch((err) => {
             setInfoMessage(err.message);
-          })
+          });
       } else {
         localStorage.setItem('token', '');
-        localStorage.setItem('filterMovie', JSON.stringify({movie: '', shortFilm: false}));
+        localStorage.setItem('filterMovie', DEFAULT_FILTER_MOVIE);
+        setCurrentUser(null);
+        setMovies([]);
+        localStorage.setItem('filterSavedMovie',DEFAULT_FILTER_MOVIE);
         setCurrentUser(null);
       }
     }
@@ -82,33 +93,36 @@ function App() {
         resizeTimeout = setTimeout(function() {
           resizeTimeout = null;
           setShowCards(setResizeShowCardsCount(showCards, window.innerWidth));
-          setShowSavedCards(setResizeShowCardsCount(showSavedCards, window.innerWidth));
          }, 500);
       }
     }
     window.addEventListener('resize', handleResize)
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [showCards, showSavedCards]);
+  }, [showCards]);
   React.useEffect(() => {
-    setFilteredMovies(movies.reduce((result, movie) => {
-      if(getMovieFilter(movie, filterMovie)){
-        result.push({
-          id : movie.id,
-          country : movie.country,
-          director : movie.director,
-          year: movie.year,
-          description :movie.description,
-          thumbnail : movie.image && movie.image.formats.thumbnail,
-          name: movie.nameRU ? movie.nameRU : movie.nameEN,
-          trailerLink : movie.trailerLink ? movie.trailerLink : '',
-          image : movie.image && movie.image.url ? movie.image.url : '',
-          duration : movie.duration ? movie.duration : ''
-        })
-      }
-      return result;
-    }, []));
-  }, [movies, filterMovie]);
+    if(isLoggedIn) {
+      setFilteredMovies(movies.reduce((result, movie) => {
+        if(getMovieFilter(movie, filterMovie)){
+          result.push({
+            id : movie.id,
+            country : movie.country,
+            director : movie.director,
+            year: movie.year,
+            description :movie.description,
+            thumbnail : movie.image.formats.thumbnail.url && (NOMOREPARTIES_URL + movie.image.formats.thumbnail.url),
+            nameRU: movie.nameRU ? movie.nameRU : '',
+            nameEN: movie.nameEN ? movie.nameEN : '',
+            trailerLink : movie.trailerLink ? movie.trailerLink : '',
+            image : movie.image.url && movie.image.url ? (NOMOREPARTIES_URL + movie.image.url) : '',
+            duration : movie.duration ? movie.duration : '',
+            saved: savedMovies.some((movieSaved) => movieSaved.movieId === movie.id),
+          })
+        }
+        return result;
+      }, []));
+    }
+  }, [isLoggedIn, movies, savedMovies, filterMovie]);
   const handleLogin = (data) => {
     mainApi.login(data).then((res) => {
       if (res.token){
@@ -124,29 +138,41 @@ function App() {
   const handleLogout = () => {
       setIsLoggedIn(false);
   }
-  const handleCardLike = (likedCard) => {
-    setMovies(
-      movies.map(
-        moviesCard => {
-          if(likedCard.id === moviesCard.id){
-            moviesCard.liked = (!moviesCard.liked) ? true : false;
-          }
-          return moviesCard;
-        }
-      )
-    );
+  const handleMovieSave = (movieSaved) => {
+    mainApi.saveMovie({
+        country: movieSaved.country,
+        director: movieSaved.director,
+        duration: movieSaved.duration,
+        year: movieSaved.year,
+        description: movieSaved.description,
+        image: movieSaved.image,
+        trailerLink: movieSaved.trailerLink,
+        thumbnail: movieSaved.thumbnail,
+        movieId: movieSaved.id,
+        nameRU: movieSaved.nameRU,
+        nameEN: movieSaved.nameEN,
+      })
+      .then((movie) => {
+        setSavedMovies([movie, ...savedMovies]);
+        setInfoMessage('');
+      })
+      .catch((err) => {
+        setInfoMessage(err.message);
+    })
   }
-  const handleCardDelete = (deletedCard) => {
-    setMovies(
-      movies.map(
-        moviesCard => {
-          if(deletedCard.id === moviesCard.id){
-            moviesCard.liked = false;
-          }
-          return moviesCard;
-        }
-      )
-    );
+  const handleMovieDelete = (movieDeleted) => {
+    const movieDeletedId = (movieDeleted._id) ? movieDeleted._id :
+      savedMovies.find((movieSaved) => movieSaved.movieId === movieDeleted.id)._id;
+    mainApi.removeMovie(movieDeletedId)
+    .then(() => {
+      setSavedMovies(savedMovies.filter(movie => movie._id !== movieDeletedId));
+      setInfoMessage('');
+    }).catch((err) => {
+      setInfoMessage(err.message);
+    })    
+  .finally(() => {
+    setIsLoading(false);
+  });  
   }
   const handleMenuPopup = () => {
     setIsMenuPopupOpen(true);
@@ -154,19 +180,16 @@ function App() {
   const handleCardsMore = () => {
     setShowCards(showCards + setAppendShowCardsCount(window.innerWidth));
   }
-  const handleSavedCardsMore = () => {
-    setShowSavedCards(showSavedCards + setAppendShowCardsCount(window.innerWidth));
-  }
   const handleFilterMovie = (filterValue) => {
     setFilterMovie(filterValue);
     localStorage.setItem('filterMovie', JSON.stringify(filterValue));
+    setInfoMessage('');
     if(!movies.length){
       setIsLoading(true);
       moviesApi.getMovies()
         .then(data => {
           setMovies(data);
           localStorage.setItem('movies', JSON.stringify(data));
-          setInfoMessage('');
         })
         .catch((err) => {
           setInfoMessage(LOAD_MOVIES_ERROR);
@@ -212,7 +235,8 @@ function App() {
                     showCards={showCards}
                     errorMessage={infoMessage}
                     onFilterMovie={handleFilterMovie}
-                    onCardLike={handleCardLike}
+                    onMovieSave={handleMovieSave}
+                    onMovieDelete={handleMovieDelete}
                     onCardsMore={handleCardsMore}
                   />
                 }
@@ -232,10 +256,8 @@ function App() {
                     savedMovies={savedMovies}
                     isLoading={isLoading}
                     errorMessage={infoMessage}
-                    showSavedCards={showSavedCards}
                     onFilterSavedMovie={handleFilterSavedMovie}
-                    onCardDelete={handleCardDelete}
-                    onSavedCardsMore={handleSavedCardsMore}
+                    onMovieDelete={handleMovieDelete}
                   />
                 }
                 <Footer/>

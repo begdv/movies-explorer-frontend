@@ -13,7 +13,8 @@ function Movies(props) {
     isLoading,
     showCards,
     errorMessage,
-    onCardLike: handleCardLike,
+    onMovieSave: handleMovieSave,
+    onMovieDelete: handleMovieDelete,
     onCardsMore: handleClickCardsMore,
     onFilterMovie: handleFilterMovie,
   } = props;
@@ -33,7 +34,8 @@ function Movies(props) {
           movies && <MoviesCardList
             movies={movies}
             showCards={showCards}
-            onCardLike={handleCardLike}
+            onMovieSave={handleMovieSave}
+            onMovieDelete={handleMovieDelete}
             onCardsMore={handleClickCardsMore}
           />
         }

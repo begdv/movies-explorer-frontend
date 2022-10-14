@@ -1,4 +1,4 @@
-export const NOMOREPARTIES_URL = 'https://api.nomoreparties.co/';
+export const NOMOREPARTIES_URL = 'https://api.nomoreparties.co';
 export const NOMOREPARTIES_API = 'https://api.nomoreparties.co/beatfilm-movies';
 export const BACKEND_API = 'http://localhost:3000';
 

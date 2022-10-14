@@ -1,22 +1,24 @@
+import { useLocation } from 'react-router-dom';
+
 import clsx from 'clsx'
 
-import {NOMOREPARTIES_URL} from "../../../utils/const";
 import {calcDuration} from "../../../utils/utils";
 
 import './MoviesCard.css';
 
 function MoviesCard(props) {
+  const route = useLocation().pathname.replace('/','');
   const {
     moviesCard,
-    onCardLike: handleCardLike,
-    onCardDelete: handleCardDelete,
-    savedCards = false
+    onMovieSave: handleMovieSave,
+    onMovieDelete: handleMovieDelete,
   } = props;
-  const buttonCardClassName = (savedCards) ?
+  const buttonCardClassName = (route === 'saved-movies') ?
     'MoviesCard__button-like_delete' :
-    ((moviesCard.liked) ? 'MoviesCard__button-like_liked' : '');
-  const handleCardClick = (moviesCard) => {
-    (savedCards) ?  handleCardDelete(moviesCard) : handleCardLike(moviesCard);
+    ((moviesCard.saved) ? 'MoviesCard__button-like_liked' : '');
+  const handleCardClick = (e) => {
+    (route === 'saved-movies') ?  handleMovieDelete(moviesCard) : (
+      (e.target.className === 'MoviesCard__button-like') ? handleMovieSave(moviesCard) : handleMovieDelete(moviesCard));
   }
   return (
     <li className="MoviesCard">
@@ -29,17 +31,17 @@ function MoviesCard(props) {
       >
         <img
           className="MoviesCard__image"
-          src={`${NOMOREPARTIES_URL}${moviesCard.image}`}
-          alt={moviesCard.nameRU}
+          src={moviesCard.image}
+          alt={(moviesCard.nameRU) ? moviesCard.nameRU : moviesCard.nameEN}
         />
       </a>
       <div className="MoviesCard__info">
-        <p className="MoviesCard__name">{moviesCard.name}</p>
+        <p className="MoviesCard__name">{(moviesCard.nameRU) ? moviesCard.nameRU : moviesCard.nameEN}</p>
         <button
           type="button"
           className={clsx('MoviesCard__button-like', buttonCardClassName)}
           title="Нажмите кнопку чтобы сохранить фильм"
-          onClick={() => handleCardClick(moviesCard)}
+          onClick={handleCardClick}
         >
         </button>
       </div>
