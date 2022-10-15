@@ -27,6 +27,7 @@ function App() {
   const [isConnected, setIsConnected] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState(null);
+  const [isEditProfile, SetIsEditProfile] = React.useState(false);
   const [isMenuPopupOpen, setIsMenuPopupOpen] = React.useState(false);
   const [typeInfo, setTypeInfo] = React.useState('');
   const [infoMessage, setInfoMessage] = React.useState('');
@@ -49,7 +50,6 @@ function App() {
       })
       .catch((err) => {
         setIsLoggedIn(false);
-        setInfoMessage(err.message);
       })
       .finally(() => {
         setIsConnected(true);
@@ -71,6 +71,7 @@ function App() {
             loadSavedMovie();
           })
           .catch((err) => {
+            alert(err.status)
             setInfoMessage(err.message);
           });
       } else {
@@ -134,6 +135,10 @@ function App() {
     });
   };
 
+  const handleEditProfile = () => {
+    SetIsEditProfile(true);
+  };
+
   const handleUpdateProfile = (data) => {
     mainApi.saveProfile(data)
       .then((user) => {
@@ -141,6 +146,7 @@ function App() {
         setInfoMessage(PROFILE_SUCCESS);
         setTypeInfo('ok');
         setIsInfoPopupOpen(true);
+        SetIsEditProfile(false);
       })
       .catch((err) => {
         setInfoMessage(err.message);
@@ -167,6 +173,7 @@ function App() {
       })
       .then((movie) => {
         setSavedMovies([movie, ...savedMovies]);
+        updateFilteredMovies(movieSaved.id, true);
         setInfoMessage('');
       })
       .catch((err) => {
@@ -180,6 +187,7 @@ function App() {
     mainApi.removeMovie(movieDeletedId)
     .then(() => {
       setSavedMovies(savedMovies.filter(movie => movie._id !== movieDeletedId));
+      updateFilteredMovies(((movieDeleted._id)) ? movieDeleted.movieId : movieDeleted.id, false);
       setInfoMessage('');
     }).catch((err) => {
       setInfoMessage(err.message);
@@ -195,9 +203,26 @@ function App() {
 
   async function handleFilterMovie (filterValue) {
     setInfoMessage('');
-    if(!movies.length){
-      loadAllMovies();
+    if(movies.length){
+      getFilterMovies(movies, filterValue)
+    } else {
+      setIsLoading(true);
+      moviesApi.getMovies()
+        .then(data => {
+          localStorage.setItem('movies', JSON.stringify(data));
+          setMovies(data);
+          getFilterMovies(data, filterValue);
+        })
+        .catch((err) => {
+          setInfoMessage(LOAD_MOVIES_ERROR);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        })
     }
+  };
+
+  const getFilterMovies = (movies, filterValue) => {
     const newFilteredMovies = movies.reduce((result, movie) => {
       if(getMovieFilter(movie, filterValue)){
         result.push({
@@ -217,26 +242,22 @@ function App() {
       }
       return result;
     }, []);
+    setFilterMovie(filterValue);
     localStorage.setItem('filterMovie', JSON.stringify(filterValue));
     localStorage.setItem('filteredMovies', JSON.stringify(newFilteredMovies));
-    setFilterMovie(filterValue);
     setFilteredMovies(newFilteredMovies);
-  };
+  }
 
-  function loadAllMovies(){
-      setIsLoading(true);
-      moviesApi.getMovies()
-        .then(data => {
-          setMovies(data);
-          localStorage.setItem('movies', JSON.stringify(data));
-        })
-        .catch((err) => {
-          setInfoMessage(LOAD_MOVIES_ERROR);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        })
-   }
+  const updateFilteredMovies = (movieId, save) => {
+    const newFilteredMovies = filteredMovies.map((movie) => {
+      if(movie.id === movieId) {
+        movie.saved = save;
+      }
+      return movie;
+    });
+    localStorage.setItem('filteredMovies', JSON.stringify(newFilteredMovies));
+    setFilteredMovies(newFilteredMovies);
+  }
 
   const handleFilterSavedMovie = (filterValue) => {
     setFilterSavedMovie(filterValue);
@@ -250,12 +271,15 @@ function App() {
     );
   };
 
+  const handleNavigation = () => {
+    setInfoMessage('');
+  }
+
   const handleMenuPopup = () => {
     setIsMenuPopupOpen(true);
   };
 
   const closePopups = () => {
-    setIsMenuPopupOpen(false);
     setIsInfoPopupOpen(false);
   };
 
@@ -268,7 +292,10 @@ function App() {
             path="/"
             element={
               <>
-                <Header isLoggedIn={isLoggedIn} onMenuPopup={handleMenuPopup} />
+                <Header
+                  isLoggedIn={isLoggedIn}
+                  onMenuPopup={handleMenuPopup}
+                />
                 <Main onMenuPopup={handleMenuPopup}/>
                 <Footer/>
               </>
@@ -279,7 +306,11 @@ function App() {
             element={
               isConnected && !isLoggedIn ? <Navigate to="/" /> :
               <>
-                <Header isLoggedIn={true} onMenuPopup={handleMenuPopup} />
+                <Header
+                  isLoggedIn={true}
+                  onMenuPopup={handleMenuPopup}
+                  onNavigation={handleNavigation}
+                />
                 {
                   currentUser && <Movies
                     filterMovie={filterMovie}
@@ -302,7 +333,11 @@ function App() {
             element={
               isConnected && !isLoggedIn ? <Navigate to="/" /> :
               <>
-                <Header isLoggedIn={true} onMenuPopup={handleMenuPopup} />
+                <Header
+                  isLoggedIn={true}
+                  onMenuPopup={handleMenuPopup}
+                  onNavigation={handleNavigation}
+                />
                 {
                   currentUser && <SavedMovies
                     filterSavedMovie={filterSavedMovie}
@@ -322,10 +357,17 @@ function App() {
             element={
               isConnected && !isLoggedIn ? <Navigate to="/" /> :
                 <>
-                  <Header isLoggedIn={true} onMenuPopup={handleMenuPopup} />
+                <Header
+                  isLoggedIn={true}
+                  onMenuPopup={handleMenuPopup}
+                  onNavigation={handleNavigation}
+                />
                   {
                     currentUser && <Profile
+                      isEditProfile={isEditProfile}
+                      errorMessage={infoMessage}
                       onMenuPopup={handleMenuPopup}
+                      onEditProfile={handleEditProfile}
                       onUpdateProfile={handleUpdateProfile}
                       onLogout={handleLogout}
                     />

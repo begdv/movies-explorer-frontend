@@ -1,5 +1,6 @@
 
 .MEFormError{
+  display:inline-block;
   color: #EE3465;
   font-family: Inter, Arial, sans-serif;
   font-style: normal;
@@ -22,8 +23,17 @@
 
 .MEFormError_type_main{
   font-size: 11px;
-  line-height: 13px;
+  line-height: 16px;
   text-align: center;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .MEFormError_type_main{
+    font-size: 13px;
+    max-width: none;
+    max-height: 20px;
+  }
 }
 
 .MEFormError_type_filter{
@@ -42,13 +52,15 @@
 
 .MEFormError_type_movie{
   font-size: 11px;
-  line-height: 18px;
+  line-height: 16px;
   text-align: left;
-  height: 20px;
+  margin-bottom: 10px;
 }
 
 @media screen and (min-width: 768px) {
-  .MEFormError_type_filter{
+  .MEFormError_type_movie{
     font-size: 13px;
+    max-width: none;
+    max-height: 20px;
   }
 }

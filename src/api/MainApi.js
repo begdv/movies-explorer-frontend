@@ -8,7 +8,7 @@ class MainApi {
     })
       .then((res) => {
           return this._processResult(res);
-      });
+      })
   }
   register({email, password, name}) {
     return fetch(`${BACKEND_API}/signup`, {

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import {useFormWithValidation} from '../../../validators/formValidator';
+import MEFormError from "../../controls/MEFormError/MEFormError";
 
 import MEFormInput from "../../controls/MEFormInput/MEFormInput";
 import MEButton from '../../controls/MEButton/MEButton';
@@ -15,7 +16,10 @@ function Profile(props) {
 
   const {
     onUpdateProfile: handleUpdateProfile,
+    onEditProfile: handleEditProfile,
     onLogout: handleLogout,
+    errorMessage,
+    isEditProfile,
   } = props;
 
   const {values, handleChange, errors, isValid} = useFormWithValidation({
@@ -23,18 +27,15 @@ function Profile(props) {
     email: currentUser.email,
   });
 
-  const [isEditProfile, SetIsEditProfile] = React.useState(false);
-
   const handleProfileEditClick= (e) => {
     e.preventDefault();
 
-    SetIsEditProfile(true);
+    handleEditProfile();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    SetIsEditProfile(false);
     handleUpdateProfile(values);
   };
 
@@ -75,6 +76,10 @@ function Profile(props) {
           {
             isEditProfile ?
               <div className="Profile__controls">
+                <MEFormError
+                  errorMessage={errorMessage}
+                  className="MEFormError_type_main"
+                />
                 <MEButton
                   className={clsx('MEButton_type_profile-submit', disabledSave ? 'MEButton_disabled' : '')}
                   type="submit"

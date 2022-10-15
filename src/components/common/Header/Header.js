@@ -16,12 +16,13 @@ function Header(props) {
   const {
     isLoggedIn = false,
     onMenuPopup: handleMenuPopup,
+    onNavigation: handleNavigation,
   } = props;
 
   const HeaderLoggedIn = () => {
     return (
       <header className={clsx('Header', (route === '/') ? 'Header_page_main' : '')}>
-        <Navigation onMenuPopup={handleMenuPopup}/>
+        <Navigation onMenuPopup={handleMenuPopup} onNavigation={handleNavigation} />
       </header>
     )
   };
