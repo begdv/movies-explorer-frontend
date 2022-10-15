@@ -136,6 +136,7 @@ function App() {
   };
 
   const handleEditProfile = () => {
+    setInfoMessage('');
     SetIsEditProfile(true);
   };
 
