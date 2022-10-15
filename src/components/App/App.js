@@ -204,7 +204,8 @@ function App() {
   async function handleFilterMovie (filterValue) {
     setInfoMessage('');
     if(movies.length){
-      getFilterMovies(movies, filterValue)
+      getFilterMovies(movies, filterValue);
+      setShowCards(getInitialShowCardsCount(window.innerWidth));
     } else {
       setIsLoading(true);
       moviesApi.getMovies()
