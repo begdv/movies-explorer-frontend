@@ -39,6 +39,7 @@ function Movies(props) {
             onMovieSave={handleMovieSave}
             onMovieDelete={handleMovieDelete}
             onCardsMore={handleClickCardsMore}
+            isLoading={isLoading}
           />
         }
       </section>

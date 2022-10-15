@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import clsx from 'clsx'
 
 import MEButton from '../../controls/MEButton/MEButton';
-
 import MoviesCard from "../MoviesCard/MoviesCard";
+import { MESSAGE_NOT_FOUND } from "../../../utils/const";
 
 import './MoviesCardList.css';
 
@@ -13,11 +13,14 @@ function MoviesCardList(props) {
   const {
     movies,
     showCards,
+    isLoading,
     onMovieSave: handleMovieSave,
     onMovieDelete: handleMovieDelete,
     onCardsMore: handleClickCardsMore,
   } = props;
-  
+
+  const messageNotFound = (isLoading) ? '' : MESSAGE_NOT_FOUND;
+
   return (
     <section className="MoviesCardList">
       {
@@ -35,7 +38,7 @@ function MoviesCardList(props) {
             )}
           </ul>
         :
-          <p className="MoviesCardList__notfound">Ничего не найдено</p>
+          <p className="MoviesCardList__notfound">{messageNotFound}</p>
       }
       { route === 'movies' &&
         <MEButton
