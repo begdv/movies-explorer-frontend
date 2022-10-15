@@ -17,6 +17,7 @@ function MEFormInput(props) {
     required,
     value,
     disabled,
+    pattern,
     errorMessage = "",
     onChangeValue: handleChangeValue,
   } = props;
@@ -55,6 +56,7 @@ function MEFormInput(props) {
           required={required}
           value={value}
           disabled={disabled}
+          pattern={pattern}
           onChange={handleChangeValue}
         />
       </div>
