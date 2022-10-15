@@ -132,3 +132,24 @@
     line-height: 17px;
   }
 }
+
+@media screen and (min-width: 768px) {
+  .MEButton_type_profile-submit{
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.MEButton_type_not-found{
+  font-size: 12px;
+  line-height: 15px;
+  color: #3456F3;
+  background: #FAFAFA;
+}
+
+@media screen and (min-width: 768px) {
+  .MEButton_type_not-found{
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
