@@ -36,6 +36,11 @@ function SearchForm(props) {
   };
 
   const handleSwitchChange = (switchValue) => {
+    if((movieValue === '') && required){
+      setFilterError(FILTER_MOVIE_ERROR);
+      return;
+    }
+
     handleFilterMovie({...filterMovie, shortFilm : switchValue});
   };
 
