@@ -5,6 +5,7 @@
 * Используемые технологии
 * Публичный IP-адрес сервера
 * Ссылки на страницу
+* Ссылка на пул реквест
 * Автор
 
 **Описание проекта**
@@ -27,6 +28,10 @@ https://disk.yandex.ru/d/KV05t-TLtnFf5g
 
 http://begunovdv.movies-explorer.nomoredomains.sbs
 https://begunovdv.movies-explorer.nomoredomains.sbs
+
+**Ссылки на страницу**
+
+https://github.com/begdv/movies-explorer-frontend/tree/level-3
 
 **Автор**
 
