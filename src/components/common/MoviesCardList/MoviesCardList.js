@@ -20,11 +20,15 @@ function MoviesCardList(props) {
   } = props;
 
   const messageNotFound = (isLoading) ? '' : MESSAGE_NOT_FOUND;
+  const countMovies = (route === 'movies') ? movies.length :
+      movies.reduce((result, movie) => {
+        return (!movie.filtered) ? result + 1 : result;
+      }, 0);
 
   return (
     <section className="MoviesCardList">
       {
-        (movies.length > 0) ?
+        (countMovies > 0) ?
           <ul className="MoviesCardList__films">
             {movies && movies.map((moviesCard, index) =>
               (((route === 'movies') && (index < showCards)) ||
