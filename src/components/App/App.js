@@ -293,6 +293,7 @@ function App() {
   };
 
   const closePopups = () => {
+    setIsMenuPopupOpen(false);
     setIsInfoPopupOpen(false);
   };
 
