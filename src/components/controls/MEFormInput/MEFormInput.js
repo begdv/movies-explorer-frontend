@@ -12,6 +12,7 @@ function MEFormInput(props) {
     type,
     name,
     title,
+    hint,
     minLength,
     maxLength,
     required,
@@ -57,6 +58,7 @@ function MEFormInput(props) {
           value={value}
           disabled={disabled}
           pattern={pattern}
+          title={hint}
           onChange={handleChangeValue}
         />
       </div>

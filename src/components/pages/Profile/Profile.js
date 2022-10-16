@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import {useFormWithValidation} from '../../../validators/formValidator';
 import MEFormError from "../../controls/MEFormError/MEFormError";
+import {PROMPT_USERNAME} from "../../../utils/const";
 
 import MEFormInput from "../../controls/MEFormInput/MEFormInput";
 import MEButton from '../../controls/MEButton/MEButton';
@@ -63,6 +64,7 @@ function Profile(props) {
             disabled={isEditProfile ? false : true}
             onChangeValue={handleChange}
             errorMessage={errors["name"]}
+            hint={PROMPT_USERNAME}
           />
           <MEFormInput
             type="email"

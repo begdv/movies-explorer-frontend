@@ -9,6 +9,8 @@ import MEFormInput from "../../controls/MEFormInput/MEFormInput";
 import MEButton from '../../controls/MEButton/MEButton';
 import MELink from '../../controls/MELink/MELink';
 
+import {PROMPT_USERNAME} from "../../../utils/const";
+
 import './Register.css';
 
 function Register(props) {
@@ -41,6 +43,7 @@ function Register(props) {
             value={values["name"]}
             onChangeValue={handleChange}
             errorMessage={errors["name"]}
+            hint={PROMPT_USERNAME}
           />
           <MEFormInput
             type="email"
