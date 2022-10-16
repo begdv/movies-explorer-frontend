@@ -29,7 +29,7 @@ https://disk.yandex.ru/d/KV05t-TLtnFf5g
 http://begunovdv.movies-explorer.nomoredomains.sbs
 https://begunovdv.movies-explorer.nomoredomains.sbs
 
-**Ссылки на страницу**
+**Ссылки на  пулл реквест**
 
 https://github.com/begdv/movies-explorer-frontend/tree/level-3
 
