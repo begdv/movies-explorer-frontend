@@ -5,7 +5,7 @@ export const BACKEND_API = 'https://api.begunovdv.movies-explorer.nomoredomains.
 export const DEFAULT_FILTER_MOVIE = {movie: '', shortFilm: false};
 
 export const PROFILE_SUCCESS = 'Профиль пользователя успешно обновлен';
-export const PROMPT_USERNAME = 'Имя пользователя может содержать латинские буквы, русские буквы, пробел или дефис.';
+export const PROMPT_USERNAME = 'Имя должно содержать латинские или русские буквы, пробел или дефис. Длина поля от 2 до 30 символов.';
 
 export const ERROR_FILTER = 'Нужно ввести ключевое слово';
 export const MESSAGE_NOTFOUND = 'Ничего не найдено';
