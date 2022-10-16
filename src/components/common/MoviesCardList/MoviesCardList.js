@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 import MEButton from '../../controls/MEButton/MEButton';
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { MESSAGE_NOT_FOUND } from "../../../utils/const";
+import { MESSAGE_NOTFOUND } from "../../../utils/const";
 
 import './MoviesCardList.css';
 
@@ -19,7 +19,7 @@ function MoviesCardList(props) {
     onCardsMore: handleClickCardsMore,
   } = props;
 
-  const messageNotFound = (isLoading) ? '' : MESSAGE_NOT_FOUND;
+  const messageNotFound = (isLoading) ? '' : MESSAGE_NOTFOUND;
   const countMovies = (route === 'movies') ? movies.length :
       movies.reduce((result, movie) => {
         return (!movie.filtered) ? result + 1 : result;

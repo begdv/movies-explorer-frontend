@@ -14,7 +14,7 @@ function SavedMovies(props) {
     onMovieDelete: handleMovieDelete,
     onFilterSavedMovie: handleFilterSavedMovie,
   } = props;
-  
+
   return (
     <main className="SavedMovies App__main">
       <SearchForm

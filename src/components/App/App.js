@@ -15,11 +15,22 @@ import Login from "../pages/Login/Login";
 import NotFound from "../pages/NotFound/NotFound";
 import MenuPopup from "../popups/MenuPopup/MenuPopup";
 import InfoPopup from "../popups/InfoPopup/InfoPopup";
+import MEPreloader from "../../components/controls/MEPreloader/MEPreloader";
 
-import {DEFAULT_FILTER_MOVIE, LOAD_MOVIES_ERROR, NOMOREPARTIES_URL, PROFILE_SUCCESS} from '../../utils/const';
-import {getMovieFilter} from '../../utils/utils';
+import {
+    DEFAULT_FILTER_MOVIE,
+    ERROR_LOADMOVIES,
+    NOMOREPARTIES_URL,
+    PROFILE_SUCCESS
+  } from '../../utils/const';
+import {processErrors} from '../../utils/errors';
 
-import {getInitialShowCardsCount, setResizeShowCardsCount, setAppendShowCardsCount} from "../../utils/utils";
+import {
+    getMovieFilter,
+    getInitialShowCardsCount,
+    setResizeShowCardsCount,
+    setAppendShowCardsCount
+  } from "../../utils/utils";
 
 import "./App.css";
 
@@ -32,7 +43,7 @@ function App() {
   const [typeInfo, setTypeInfo] = React.useState('');
   const [infoMessage, setInfoMessage] = React.useState('');
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [showCards, setShowCards] = React.useState(getInitialShowCardsCount(window.innerWidth));
   const [movies, setMovies] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
@@ -46,13 +57,13 @@ function App() {
     mainApi.verifyToken()
       .then(() => {
         setIsLoggedIn(true);
-        setInfoMessage('');
       })
       .catch((err) => {
         setIsLoggedIn(false);
       })
       .finally(() => {
         setIsConnected(true);
+        setIsLoading(false);
     }); ;
   }, []);
 
@@ -71,8 +82,7 @@ function App() {
             loadSavedMovie();
           })
           .catch((err) => {
-            alert(err.status)
-            setInfoMessage(err.message);
+            processErrors(err, 'loadpage', setInfoMessage, setIsLoggedIn);
           });
       } else {
         localStorage.setItem('token', '');
@@ -118,7 +128,7 @@ function App() {
         password: data.password,
       })
     }).catch((err) => {
-      setInfoMessage(err.message);
+      processErrors(err, 'register', setInfoMessage, setIsLoggedIn);
     });
   };
 
@@ -131,7 +141,7 @@ function App() {
         setIsLoggedIn(true);
       }
     }).catch((err) => {
-      setInfoMessage(err.message);
+      processErrors(err, 'login', setInfoMessage, setIsLoggedIn);
     });
   };
 
@@ -150,7 +160,7 @@ function App() {
         SetIsEditProfile(false);
       })
       .catch((err) => {
-        setInfoMessage(err.message);
+        processErrors(err, 'profile', setInfoMessage, setIsLoggedIn);
     });
   };
 
@@ -178,7 +188,7 @@ function App() {
         setInfoMessage('');
       })
       .catch((err) => {
-        setInfoMessage(err.message);
+        processErrors(err, 'savemovie', setInfoMessage, setIsLoggedIn);
     })
   };
 
@@ -191,7 +201,7 @@ function App() {
       updateFilteredMovies(((movieDeleted._id)) ? movieDeleted.movieId : movieDeleted.id, false);
       setInfoMessage('');
     }).catch((err) => {
-      setInfoMessage(err.message);
+      processErrors(err, 'deletemmovie', setInfoMessage, setIsLoggedIn);
     })
     .finally(() => {
       setIsLoading(false);
@@ -216,7 +226,7 @@ function App() {
           getFilterMovies(data, filterValue);
         })
         .catch((err) => {
-          setInfoMessage(LOAD_MOVIES_ERROR);
+          setInfoMessage(ERROR_LOADMOVIES);
         })
         .finally(() => {
           setIsLoading(false);
@@ -275,6 +285,7 @@ function App() {
 
   const handleNavigation = () => {
     setInfoMessage('');
+    SetIsEditProfile(false);
   }
 
   const handleMenuPopup = () => {
@@ -288,7 +299,7 @@ function App() {
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
-        <Routes>
+        {isConnected && <Routes>
           <Route
             exact
             path="/"
@@ -409,7 +420,7 @@ function App() {
               <NotFound />
             }
           />
-        </Routes>
+        </Routes>}
         <MenuPopup
           isOpen={isMenuPopupOpen}
           onClose={closePopups}
@@ -420,6 +431,7 @@ function App() {
           infoMessage={infoMessage}
           onClose={closePopups}
         />
+        <MEPreloader isShow={isLoading}/>
       </CurrentUserContext.Provider>
     </div>
   );

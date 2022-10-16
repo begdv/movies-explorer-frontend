@@ -2,8 +2,6 @@ import SearchForm from "../../common/SearchForm/SearchForm";
 import MoviesCardList from "../../common/MoviesCardList/MoviesCardList";
 import MEFormError from "../../controls/MEFormError/MEFormError";
 
-import MEPreloader from "../../../components/controls/MEPreloader/MEPreloader";
-
 import './Movies.css';
 
 function Movies(props) {
@@ -31,7 +29,6 @@ function Movies(props) {
           errorMessage={errorMessage}
           className="MEFormError_type_movie"
         />
-        <MEPreloader isShow={isLoading}/>
         {
           movies && <MoviesCardList
             movies={movies}

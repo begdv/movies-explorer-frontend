@@ -4,7 +4,7 @@ import MEButton from "../../controls/MEButton/MEButton";
 import MEFilterSwitch from "../../controls/MEFilterSwitch/MEFilterSwitch";
 import MEFormError from "../../controls/MEFormError/MEFormError";
 
-import {FILTER_MOVIE_ERROR } from '../../../utils/const';
+import {ERROR_FILTER } from '../../../utils/const';
 
 import './SearchForm.css';
 
@@ -26,7 +26,7 @@ function SearchForm(props) {
     e.preventDefault();
 
     if((movieValue === '') && required){
-      setFilterError(FILTER_MOVIE_ERROR);
+      setFilterError(ERROR_FILTER);
       return;
     }
 
@@ -37,7 +37,7 @@ function SearchForm(props) {
 
   const handleSwitchChange = (switchValue) => {
     if((movieValue === '') && required){
-      setFilterError(FILTER_MOVIE_ERROR);
+      setFilterError(ERROR_FILTER);
       return;
     }
 

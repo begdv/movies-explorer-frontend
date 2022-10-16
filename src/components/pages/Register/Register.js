@@ -36,7 +36,7 @@ function Register(props) {
             title="Имя"
             minLength="2"
             maxLength="30"
-            pattern="[a-zA-Zа-яА-ЯёЁ0-9_ ]"
+            pattern="[a-zA-Zа-яА-ЯёЁ0-9_ ]{2,30}"
             required={true}
             value={values["name"]}
             onChangeValue={handleChange}
@@ -55,7 +55,7 @@ function Register(props) {
             type="password"
             name="password"
             title="Пароль"
-            minLength="2"
+            minLength="8"
             maxLength="30"
             required={true}
             value={values["password"]}

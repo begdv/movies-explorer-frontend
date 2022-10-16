@@ -57,6 +57,7 @@ function Profile(props) {
             title="Имя"
             minLength="2"
             maxLength="30"
+            pattern="[a-zA-Zа-яА-ЯёЁ0-9_ ]{2,30}"
             required={true}
             value={values["name"]}
             disabled={isEditProfile ? false : true}
@@ -64,7 +65,7 @@ function Profile(props) {
             errorMessage={errors["name"]}
           />
           <MEFormInput
-            type="text"
+            type="email"
             name="email"
             title="E-mail"
             required={true}
