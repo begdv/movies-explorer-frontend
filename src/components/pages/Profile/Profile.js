@@ -26,7 +26,11 @@ function Profile(props) {
   const {values, handleChange, errors, isValid} = useFormWithValidation({
     name: currentUser.name,
     email: currentUser.email,
-  });
+  },
+  {
+    name: PROMPT_USERNAME,
+  }
+  );
 
   const handleProfileEditClick= (e) => {
     e.preventDefault();
@@ -64,7 +68,6 @@ function Profile(props) {
             disabled={isEditProfile ? false : true}
             onChangeValue={handleChange}
             errorMessage={errors["name"]}
-            hint={PROMPT_USERNAME}
           />
           <MEFormInput
             type="email"

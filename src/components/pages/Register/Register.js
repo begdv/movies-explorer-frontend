@@ -19,7 +19,10 @@ function Register(props) {
     infoMessage,
   } = props;
 
-  const {values, handleChange, errors, isValid} = useFormWithValidation();
+  const {values, handleChange, errors, isValid} = useFormWithValidation({},
+  {
+    name: PROMPT_USERNAME,
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +46,6 @@ function Register(props) {
             value={values["name"]}
             onChangeValue={handleChange}
             errorMessage={errors["name"]}
-            hint={PROMPT_USERNAME}
           />
           <MEFormInput
             type="email"
