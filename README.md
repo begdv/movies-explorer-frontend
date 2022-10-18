@@ -31,7 +31,7 @@ https://begunovdv.movies-explorer.nomoredomains.sbs
 
 **Ссылки на  пулл реквест**
 
-https://github.com/begdv/movies-explorer-frontend/tree/level-3
+https://github.com/begdv/movies-explorer-frontend/pull/2
 
 **Автор**
 
