@@ -286,7 +286,6 @@ function App() {
   };
 
   const handleNavigation = () => {
-    alert('handleNavigation');
     ClearDataOnNavigation();
   }
 
