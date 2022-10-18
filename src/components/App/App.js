@@ -24,7 +24,7 @@ import {
     PROFILE_SUCCESS,
     RESIZE_TIMEOUT
   } from '../../utils/const';
-  
+
 import {processErrors} from '../../utils/errors';
 
 import {
@@ -288,6 +288,7 @@ function App() {
   const handleNavigation = () => {
     setInfoMessage('');
     SetIsEditProfile(false);
+    setFilterSavedMovie('');
   }
 
   const handleMenuPopup = () => {
