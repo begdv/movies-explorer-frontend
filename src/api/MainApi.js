@@ -13,7 +13,7 @@ class MainApi {
   register({email, password, name}) {
     return fetch(`${BACKEND_API}/signup`, {
       method: 'POST',
-      headers: {"content-type": "application/json"},
+      headers: this._makeHeader(false),
       body: JSON.stringify({
         password: password,
         email: email,
@@ -28,7 +28,7 @@ class MainApi {
   login({email, password}) {
     return fetch(`${BACKEND_API}/signin`, {
       method: 'POST',
-      headers: {"content-type": "application/json"},
+      headers: this._makeHeader(false),
       body: JSON.stringify({
         password: password,
         email: email
@@ -86,9 +86,13 @@ class MainApi {
         return this._processResult(res);
       });
   }
-  _makeHeader(){
-    const token = localStorage.getItem('token');
-    return {"Authorization": `Bearer ${token}`, "content-type": "application/json"};
+  _makeHeader(sendToken = true){
+    if(sendToken){
+      const token = localStorage.getItem('token');
+      return {"Authorization": `Bearer ${token}`, "content-type": "application/json"};
+    } else {
+      return {"content-type": "application/json"};
+    }
   }
   async _processResult(res) {
     if (res.ok) {

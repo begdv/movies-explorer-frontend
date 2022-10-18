@@ -21,8 +21,10 @@ import {
     DEFAULT_FILTER_MOVIE,
     ERROR_LOADMOVIES,
     NOMOREPARTIES_URL,
-    PROFILE_SUCCESS
+    PROFILE_SUCCESS,
+    RESIZE_TIMEOUT
   } from '../../utils/const';
+  
 import {processErrors} from '../../utils/errors';
 
 import {
@@ -103,7 +105,7 @@ function App() {
         resizeTimeout = setTimeout(function() {
           resizeTimeout = null;
           setShowCards(setResizeShowCardsCount(showCards, window.innerWidth));
-         }, 500);
+         }, RESIZE_TIMEOUT);
       }
     };
     window.addEventListener('resize', handleResize)
@@ -329,6 +331,7 @@ function App() {
                   currentUser && <Movies
                     filterMovie={filterMovie}
                     movies={filteredMovies}
+                    isLoadMovies={movies.length}
                     isLoading={isLoading}
                     showCards={showCards}
                     errorMessage={infoMessage}

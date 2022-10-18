@@ -1,3 +1,15 @@
+import {
+  SIZE_TABLET,
+  SIZE_DESKTOP,
+  INITIAL_CARD_MOBILE,
+  INITIAL_CARD_TABLET,
+  INITIAL_CARD_DESKTOP,
+  RESIZE_CARD_MOBILE,
+  RESIZE_CARD_TABLET,
+  RESIZE_CARD_DESKTOP,
+  SHORT_FILM_DURATION
+} from './const';
+
 export const calcDuration = (duration) => {
   const hour = Math.floor(duration / 60);
   const min = duration % 60;
@@ -5,15 +17,24 @@ export const calcDuration = (duration) => {
 }
 
 export const getInitialShowCardsCount = (width) => {
-  const showCards = (width < 768) ? 5 : ((width < 1280) ? 8 : 12);
+  const showCards = (width < SIZE_TABLET) ?
+      INITIAL_CARD_MOBILE
+    :
+      ((width < SIZE_DESKTOP) ? INITIAL_CARD_TABLET : INITIAL_CARD_DESKTOP);
   return showCards;
 }
 
 export const setResizeShowCardsCount = (showCards, width) => {
-  showCards = (width < 768) ? Math.floor(showCards / 2) * 2 - 1 :
-  (
-    (width < 1280) ? Math.floor(showCards / 2) * 2 : Math.floor(showCards / 4) * 4
-  );
+  showCards = (width < SIZE_TABLET) ?
+      Math.floor(showCards / RESIZE_CARD_MOBILE) * RESIZE_CARD_MOBILE - 1
+    :
+      (
+        (width < SIZE_DESKTOP)
+          ?
+            Math.floor(showCards / RESIZE_CARD_TABLET) * RESIZE_CARD_TABLET
+          :
+            Math.floor(showCards / RESIZE_CARD_DESKTOP) * RESIZE_CARD_DESKTOP
+      );
   showCards  = (showCards >= getInitialShowCardsCount(width)) ?
       showCards
     :
@@ -22,15 +43,15 @@ export const setResizeShowCardsCount = (showCards, width) => {
 }
 
 export const setAppendShowCardsCount = (width) => {
-  return (width < 1280) ? 2 : 4;
+  return (width < SIZE_DESKTOP) ? RESIZE_CARD_TABLET : RESIZE_CARD_DESKTOP;
 }
 
 export const getMovieFilter = (movie, filterMovie) => {
   const regexp = new RegExp(filterMovie.movie, 'i');
-  let result = ((movie.nameRU && movie.nameRU.search(regexp))
-  || (movie.nameEN &&   movie.nameEN.search(regexp))) !== -1;
+  let result = ((movie.nameRU && movie.nameRU.search(regexp)) ||
+    (movie.nameEN && movie.nameEN.search(regexp))) !== -1;
   if(filterMovie.shortFilm){
-    result = result && (movie.duration <= 40)
+    result = result && (movie.duration <= SHORT_FILM_DURATION)
   }
   return result;
 }

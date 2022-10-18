@@ -12,6 +12,7 @@ function MoviesCardList(props) {
   const route = useLocation().pathname.replace('/','');
   const {
     movies,
+    isLoadMovies,
     showCards,
     isLoading,
     onMovieSave: handleMovieSave,
@@ -19,7 +20,6 @@ function MoviesCardList(props) {
     onCardsMore: handleClickCardsMore,
   } = props;
 
-  const messageNotFound = (isLoading) ? '' : MESSAGE_NOTFOUND;
   const countMovies = (route === 'movies') ? movies.length :
       movies.reduce((result, movie) => {
         return (!movie.filtered) ? result + 1 : result;
@@ -42,7 +42,9 @@ function MoviesCardList(props) {
             )}
           </ul>
         :
-          <p className="MoviesCardList__notfound">{messageNotFound}</p>
+        (!(isLoading) && (isLoadMovies || (route === 'saved-movies'))) ?
+            <p className="MoviesCardList__notfound">{MESSAGE_NOTFOUND}</p>
+          : null
       }
       { route === 'movies' &&
         <MEButton

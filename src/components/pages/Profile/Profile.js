@@ -5,10 +5,16 @@ import clsx from 'clsx';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import {useFormWithValidation} from '../../../validators/formValidator';
 import MEFormError from "../../controls/MEFormError/MEFormError";
-import {PROMPT_USERNAME} from "../../../utils/const";
 
 import MEFormInput from "../../controls/MEFormInput/MEFormInput";
 import MEButton from '../../controls/MEButton/MEButton';
+
+import {
+  PATTERN_USERNAME,
+  PATTERN_EMAIL,
+  ERROR_VALIDATION_USERNAME,
+  ERROR_VALIDATION_EMAIL,
+} from "../../../utils/const";
 
 import './Profile.css';
 
@@ -28,7 +34,8 @@ function Profile(props) {
     email: currentUser.email,
   },
   {
-    name: PROMPT_USERNAME,
+    name: ERROR_VALIDATION_USERNAME,
+    email: ERROR_VALIDATION_EMAIL,
   }
   );
 
@@ -60,9 +67,7 @@ function Profile(props) {
             type="text"
             name="name"
             title="Имя"
-            minLength="2"
-            maxLength="30"
-            pattern="[a-zA-Zа-яА-ЯёЁ0-9_ ]{2,30}"
+            pattern={PATTERN_USERNAME}
             required={true}
             value={values["name"]}
             disabled={isEditProfile ? false : true}
@@ -70,10 +75,11 @@ function Profile(props) {
             errorMessage={errors["name"]}
           />
           <MEFormInput
-            type="email"
+            type="text"
             name="email"
             title="E-mail"
             required={true}
+            pattern={PATTERN_EMAIL}
             value={values["email"]}
             disabled={isEditProfile ? false : true}
             onChangeValue={handleChange}

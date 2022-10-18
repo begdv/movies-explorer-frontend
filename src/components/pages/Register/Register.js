@@ -9,7 +9,14 @@ import MEFormInput from "../../controls/MEFormInput/MEFormInput";
 import MEButton from '../../controls/MEButton/MEButton';
 import MELink from '../../controls/MELink/MELink';
 
-import {PROMPT_USERNAME} from "../../../utils/const";
+import {
+  PATTERN_USERNAME,
+  PATTERN_EMAIL,
+  PATTERN_PASSWORD,
+  ERROR_VALIDATION_USERNAME,
+  ERROR_VALIDATION_EMAIL,
+  ERROR_VALIDATION_PASSWORD
+} from "../../../utils/const";
 
 import './Register.css';
 
@@ -21,7 +28,9 @@ function Register(props) {
 
   const {values, handleChange, errors, isValid} = useFormWithValidation({},
   {
-    name: PROMPT_USERNAME,
+    name: ERROR_VALIDATION_USERNAME,
+    email: ERROR_VALIDATION_EMAIL,
+    password: ERROR_VALIDATION_PASSWORD,
   });
 
   const handleSubmit = (e) => {
@@ -39,19 +48,18 @@ function Register(props) {
             type="text"
             name="name"
             title="Имя"
-            minLength="2"
-            maxLength="30"
-            pattern="[a-zA-Zа-яА-ЯёЁ0-9_ ]{2,30}"
+            pattern={PATTERN_USERNAME}
             required={true}
             value={values["name"]}
             onChangeValue={handleChange}
             errorMessage={errors["name"]}
           />
           <MEFormInput
-            type="email"
+            type="text"
             name="email"
             title="E-mail"
             required={true}
+            pattern={PATTERN_EMAIL}
             value={values["email"]}
             onChangeValue={handleChange}
             errorMessage={errors["email"]}
@@ -60,8 +68,7 @@ function Register(props) {
             type="password"
             name="password"
             title="Пароль"
-            minLength="8"
-            maxLength="30"
+            pattern={PATTERN_PASSWORD}
             required={true}
             value={values["password"]}
             onChangeValue={handleChange}

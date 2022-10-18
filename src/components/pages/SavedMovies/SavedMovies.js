@@ -10,6 +10,7 @@ function SavedMovies(props) {
     filterSavedMovie,
     savedMovies,
     isLoading,
+    isLoadedMovies,
     errorMessage,
     onMovieDelete: handleMovieDelete,
     onFilterSavedMovie: handleFilterSavedMovie,
@@ -26,11 +27,11 @@ function SavedMovies(props) {
         errorMessage={errorMessage}
         className="MEFormError_type_movie"
       />
-      <MEPreloader isShow={isLoading}/>
       <section className="SavedMovies__content">
         {
           savedMovies && <MoviesCardList
             movies={savedMovies}
+            isLoadedMovies={isLoadedMovies}
             onMovieDelete={handleMovieDelete}
           />
         }

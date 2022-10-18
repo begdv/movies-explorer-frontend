@@ -9,6 +9,11 @@ import MEFormInput from "../../controls/MEFormInput/MEFormInput";
 import MEButton from '../../controls/MEButton/MEButton';
 import MELink from '../../controls/MELink/MELink';
 
+import {
+  PATTERN_EMAIL,
+  ERROR_VALIDATION_EMAIL,
+} from "../../../utils/const";
+
 import './Login.css';
 
 function Login(props) {
@@ -17,7 +22,10 @@ function Login(props) {
     infoMessage,
   } = props;
 
-  const {values, handleChange, errors, isValid} = useFormWithValidation();
+  const {values, handleChange, errors, isValid} = useFormWithValidation({},
+    {
+      email: ERROR_VALIDATION_EMAIL,
+    });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,10 +39,11 @@ function Login(props) {
         <form className="Login__form" name="LoginForm" onSubmit={handleSubmit} noValidate>
           <h1 className="Login__title">Рады видеть!</h1>
           <MEFormInput
-            type="email"
+            type="text"
             name="email"
             title="E-mail"
             required={true}
+            pattern={PATTERN_EMAIL}
             value={values["email"]}
             onChangeValue={handleChange}
             errorMessage={errors["email"]}

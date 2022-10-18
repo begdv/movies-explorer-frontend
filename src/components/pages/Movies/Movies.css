@@ -12,14 +12,14 @@
 
 @media screen and (min-width: 768px) {
   .Movies__content{
-    padding: 50px 30px 0;
+    padding: 40px 30px 0;
     min-height: 788px;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .Movies__content{
-    padding: 50px 70px 0;
+    padding: 40px 70px 0;
     min-height: 540px;
   }
 }

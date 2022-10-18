@@ -7,6 +7,7 @@ import './Movies.css';
 function Movies(props) {
   const {
     movies,
+    isLoadMovies,
     filterMovie,
     isLoading,
     showCards,
@@ -32,6 +33,7 @@ function Movies(props) {
         {
           movies && <MoviesCardList
             movies={movies}
+            isLoadMovies={isLoadMovies}
             showCards={showCards}
             onMovieSave={handleMovieSave}
             onMovieDelete={handleMovieDelete}
