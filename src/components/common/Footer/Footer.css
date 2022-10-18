@@ -3,6 +3,7 @@
   background: #F8F8F8;
   box-sizing: border-box;
   padding: 77px 10px 0;
+  margin-top: auto;
 }
 
 @media screen and (min-width: 768px) {

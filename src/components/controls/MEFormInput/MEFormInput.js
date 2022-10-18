@@ -2,6 +2,8 @@ import { useLocation } from 'react-router-dom';
 
 import clsx from 'clsx'
 
+import MEFormError from "../MEFormError/MEFormError";
+
 import './MEFormInput.css';
 
 function MEFormInput(props) {
@@ -10,14 +12,17 @@ function MEFormInput(props) {
     type,
     name,
     title,
+    hint,
     minLength,
     maxLength,
     required,
     value,
     disabled,
-    hasError = false,
+    pattern,
+    errorMessage = "",
     onChangeValue: handleChangeValue,
   } = props;
+
   return (
     <div
       className={
@@ -25,29 +30,41 @@ function MEFormInput(props) {
         'MEFormInput_page_profile' : 'MEFormInput_page_signing')
       }
     >
-      <span
-        className={
-          clsx('MEFormInput__label', (route === 'profile') ?
-          'MEFormInput__label_page_profile' : 'MEFormInput__label_page_signing')
+      <div className={
+        clsx('MEFormInput__control', (route === 'profile') ?
+          'MEFormInput__control_page_profile' : 'MEFormInput__control_page_signing')
         }
       >
-        {title}
-      </span>
-      <input
-        className={
-          clsx('MEFormInput__input', (route === 'profile') ?
-          'MEFormInput__input_page_profile' : 'MEFormInput__input_page_signing',
-          hasError ? 'MEFormInput__input_error' : '')
-        }
-        type={type}
-        name={name}
-        placeholder={title}
-        minLength={minLength}
-        maxLength={maxLength}
-        required={required}
-        value={value}
-        disabled={disabled}
-        onChange={handleChangeValue}
+        <span
+          className={
+            clsx('MEFormInput__label', (route === 'profile') ?
+          ' MEFormInput__label_page_profile' : 'MEFormInput__label_page_signing')
+          }
+        >
+          {title}
+        </span>
+        <input
+          className={
+            clsx('MEFormInput__input', (route === 'profile') ?
+              'MEFormInput__input_page_profile' : 'MEFormInput__input_page_signing',
+              errorMessage ? 'MEFormInput__input_error' : '')
+          }
+          type={type}
+          name={name}
+          placeholder={title}
+          minLength={minLength}
+          maxLength={maxLength}
+          required={required}
+          value={value}
+          disabled={disabled}
+          pattern={pattern}
+          title={hint}
+          onChange={handleChangeValue}
+        />
+      </div>
+      <MEFormError
+        errorMessage={errorMessage}
+        className="MEFormError_type_input"
       />
     </div>
   );

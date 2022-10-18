@@ -1,5 +1,3 @@
-import { Routes, Route } from "react-router-dom";
-
 import { useLocation } from 'react-router-dom';
 
 import clsx from 'clsx'
@@ -18,66 +16,41 @@ function Header(props) {
   const {
     isLoggedIn = false,
     onMenuPopup: handleMenuPopup,
+    onNavigation: handleNavigation,
   } = props;
-  let className;
-  if(route === '/') {
-    className = 'Header_page_main';
-  } else if ((route.replaceAll('/','') === 'signup') || (route.replaceAll('/','') === 'signin')) {
-    className = 'Header_page_signin';
-  } else if ((route.replaceAll('/','') === 'movies') || (route.replaceAll('/','') === 'saved-movies')  || (route.replaceAll('/','') === 'profile')) {
-    className = '';
-  } else {
-    className = 'Header_not_found';
-  }
+
+  const HeaderLoggedIn = () => {
+    return (
+      <header className={clsx('Header', (route === '/') ? 'Header_page_main' : '')}>
+        <Navigation onMenuPopup={handleMenuPopup} onNavigation={handleNavigation} />
+      </header>
+    )
+  };
+
+  const HeaderSignin = () => {
+    return (
+      <header className={clsx('Header', 'Header_page_signin')}>
+        <MELogo className="MELogo_page_signing"/>
+      </header>
+    )
+  };
+
+  const HeaderLanding = () => {
+    return (
+      <header className={clsx('Header', 'Header_page_main')}>
+        <div className="Header__main">
+          <MELogo />
+          <MELink className="MELink_type_header" to="/signup" title="Регистрация"/>
+          <MELinkButton className="MELinkButton_type_header" to="/signin" title="Войти"/>
+        </div>
+      </header>
+    )
+  };
+
   return (
-    <header className={clsx('Header', className)}>
-      <Routes>
-        <Route
-          end
-          path="/"
-          element={
-            isLoggedIn ?
-              <Navigation onMenuPopup={handleMenuPopup}/>
-            :
-              <div className="Header__main">
-                <MELogo />
-                <MELink className="MELink_type_header" to="/signup" title="Регистрация"/>
-                <MELinkButton className="MELinkButton_type_header" to="/signin" title="Войти"/>
-              </div>
-          }
-        />
-        <Route
-          path="movies"
-          element={
-            <Navigation onMenuPopup={handleMenuPopup}/>
-          }
-        />
-        <Route
-          path="saved-movies"
-          element={
-            <Navigation onMenuPopup={handleMenuPopup}/>
-          }
-        />
-        <Route
-          path="profile"
-          element={
-            <Navigation onMenuPopup={handleMenuPopup}/>
-          }
-        />
-        <Route
-          path="signup"
-          element={
-            <MELogo className="MELogo_page_signing"/>
-          }
-        />
-        <Route
-          path="signin"
-          element={
-            <MELogo className="MELogo_page_signing"/>
-          }
-        />
-      </Routes>
-    </header>
+    isLoggedIn ? <HeaderLoggedIn /> : (
+      (route === '/') ? <HeaderLanding /> : <HeaderSignin />
+    )
   );
 }
 

@@ -1,29 +1,40 @@
 .MEFormInput{
   display: flex;
+  flex-direction: column;
   box-sizing: border-box;
-  width: calc(100vw - 60px);
-  max-width: 396px;
+  padding: 0 0 2px;
 }
 
 .MEFormInput_page_profile{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 0 16px;
   border-bottom: solid #E8E8E8 1px;
-  margin: 0 0 18px;
-  box-sizing: border-box;
+  margin: 0 0 30px;
+}
+
+.MEFormInput_page_profile:last-of-type{
+  margin: 0;
+  border-bottom: none;
 }
 
 .MEFormInput_page_signing{
-  display: flex;
-  flex-direction: column;
   padding: 0;
-  margin: 0 0 20px;
+  margin: 0 0 6px;
 }
 
-.MEFormInput_page_signing:last-of-type{
-  margin-bottom: 8px;
+.MEFormInput__control{
+  display: flex;
+  box-sizing: border-box;
+  width: calc(100vw - 60px);
+  max-width: 396px;
+  margin: 0 0 6px;
+}
+
+.MEFormInput__control_page_profile{
+  justify-content: space-between;
+  align-items: center;
+}
+
+.MEFormInput__control_page_signing{
+  flex-direction: column;
 }
 
 .MEFormInput__input{
@@ -31,11 +42,13 @@
   font-style: normal;
   border: none;
   outline: none;
+  appearance: none;
   -webkit-appearance: none;
 }
 
 .MEFormInput__input_page_profile{
   display: flex;
+  flex-wrap: wrap;
   max-width: 122px;
   flex-basis: 50%;
   color: #000000;
@@ -52,12 +65,6 @@
 
 .MEFormInput__input_page_profile:focus{
   font-size: 12px;
-}
-
-@media screen and (min-width: 768px) {
-  .MEFormInput_page_profile{
-    width: 410px;
-  }
 }
 
 .MEFormInput__input_page_signing{
@@ -95,7 +102,6 @@
   font-size: 11px;
   line-height: 13px;
   text-align: left;
-  padding: 0 10px 0 0;
   margin: 0;
 }
 

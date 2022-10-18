@@ -71,7 +71,10 @@
   border: 0;
   width: 24px;
   height: 24px;
-  background-color: #F4F4F4;
+  flex: 24px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  background-color: #EFEFEF;
   background-image: url(../../../images/card-like.svg);
   background-position: center center;
   background-repeat: no-repeat;

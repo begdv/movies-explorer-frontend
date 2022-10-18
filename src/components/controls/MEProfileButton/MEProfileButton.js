@@ -12,13 +12,14 @@ function MEProfileButton(props) {
     className,
   } = props;
   const {
-    onClick: handleMenuPopupClick,
+    onClick: handleNavigation,
   } = props;
+
   return (
     <NavLink
       className={clsx('MEProfileButton', className, (route === '/') ? 'MEProfileButton_page_main' : '')}
       to="/profile"
-      onClick={handleMenuPopupClick}
+      onClick={handleNavigation}
     >
       <span className="MEProfileButton__title">Аккаунт</span>
       <img

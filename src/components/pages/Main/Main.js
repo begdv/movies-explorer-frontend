@@ -5,9 +5,9 @@ import AboutProject from "./AboutProject/AboutProject";
 import Techs from "./Techs/Techs";
 import AboutMe from "./AboutMe/AboutMe";
 
-function Main(props) {
+function Main() {
   return (
-    <main className="Main App__main">
+    <main className="Main">
       <Promo/>
       <AboutProject/>
       <Techs/>

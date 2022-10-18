@@ -8,7 +8,9 @@ import './Navigation.css';
 function Navigation(props) {
   const {
     onMenuPopup: handleMenuPopupButtonClick,
+    onNavigation: handleNavigation,
   } = props;
+
   return (
     <nav className="Navigation">
       <MELogo />
@@ -18,6 +20,7 @@ function Navigation(props) {
             className="MENavLink_type_header"
             to="/movies"
             title="Фильмы"
+            onClick={handleNavigation}
           />
         </li>
         <li className="Navigation__navlink">
@@ -25,10 +28,14 @@ function Navigation(props) {
             className="MENavLink_type_header"
             to="/saved-movies"
             title="Сохраненные фильмы"
+            onClick={handleNavigation}
           />
         </li>
       </ul>
-      <MEProfileButton className="MEProfileButton_type_header"/>
+      <MEProfileButton
+        className="MEProfileButton_type_header"
+        onNavigation={handleNavigation}
+      />
       <MEMenuPopupButton onClick={handleMenuPopupButtonClick}/>
     </nav>
   );

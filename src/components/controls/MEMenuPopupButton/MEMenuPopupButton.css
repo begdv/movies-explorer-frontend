@@ -8,10 +8,12 @@
   background-image: url(../../../images/popup-menu-320.svg);
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 1;
 }
 
 .MEMenuPopupButton_page_main{
   background: #DDDEE3;
+  background-image: url(../../../images/popup-menu-320.svg);
 }
 
 .MEMenuPopupButton:hover{

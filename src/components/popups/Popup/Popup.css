@@ -1,12 +1,10 @@
 .Popup{
   display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
+  width: 100%;
   visibility: hidden;
   transition: visibility 0s 0.5s, opacity 0.5s linear;
   background: rgba(0, 0, 0, 0.3);
@@ -16,6 +14,11 @@
 .Popup_type_menu{
   justify-content: flex-end;
   align-items: flex-start;
+}
+
+.Popup_type_tooltip{
+  justify-content: center;
+  align-items: center;
 }
 
 .Popup_opened{
@@ -29,20 +32,21 @@
 }
 
 .Popup__container_type_menu{
-  height: 100%;
-  width: 100%;
   background: #FAFAFA;
+  width: 100%;
+  max-width: 520px;
 }
 
-.Popup__container_type_menu{
-  max-width: 520px;
+.Popup__container_type_tooltip{
+  background: rgba(0, 0, 0, 0.3);
+  min-height: 330px;
+  max-width: 430px;
+  width: calc(100vw - 80px);
 }
 
 .Popup__button-close{
   display: flex;
   position: absolute;
-  top: 15px;
-  right: 15px;
   width: 30px;
   height: 30px;
   box-sizing: border-box;
@@ -53,12 +57,27 @@
   border: 0;
 }
 
+.Popup__button-close_type_menu{
+  top: 15px;
+  right: 15px;
+}
+
 @media screen and (min-width: 768px) {
-  .Popup__button-close{
+  .Popup__button-close_type_menu{
     top: 22px;
     right: 22px;
-    width: 30px;
-    height: 30px;
+  }
+}
+
+.Popup__button-close_type_tooltip{
+  top: -32px;
+  right: -32px;
+}
+
+@media screen and (min-width: 768px) {
+  .Popup__button-close_type_tooltip{
+    top: -32px;
+    right: -32px;
   }
 }
 

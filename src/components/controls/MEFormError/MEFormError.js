@@ -4,12 +4,13 @@ import './MEFormError.css';
 
 function MEFormError(props) {
   const {
-    hasError = false,
     errorMessage = '',
+    className,
   } = props;
+
   return (
     <span
-      className={clsx('MEFormError', hasError ? 'MEFormError_show' : '')}
+      className={clsx('MEFormError', className, errorMessage ? 'MEFormError_show' : '')}
     >
       {errorMessage}
     </span>

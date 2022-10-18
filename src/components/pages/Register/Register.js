@@ -1,79 +1,98 @@
 import React from 'react';
 
-import MEFormInput from "../../controls/MEFormInput/MEFormInput";
+import clsx from 'clsx';
+
+import {useFormWithValidation} from '../../../validators/formValidator';
 import MEFormError from "../../controls/MEFormError/MEFormError";
+
+import MEFormInput from "../../controls/MEFormInput/MEFormInput";
 import MEButton from '../../controls/MEButton/MEButton';
 import MELink from '../../controls/MELink/MELink';
+
+import {
+  PATTERN_USERNAME,
+  PATTERN_EMAIL,
+  PATTERN_PASSWORD,
+  ERROR_VALIDATION_USERNAME,
+  ERROR_VALIDATION_EMAIL,
+  ERROR_VALIDATION_PASSWORD
+} from "../../../utils/const";
 
 import './Register.css';
 
 function Register(props) {
-  const [name, setName] = React.useState('Виталий');
-  const [email, setEmail] = React.useState('pochta@yandex.ru');
-  const [password, setPassword] = React.useState('12345678');
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  }
-  function handleChangePassword(e) {
-    setPassword(e.target.value);
-  }
+  const {
+    onRegister: handleRegister,
+    infoMessage,
+  } = props;
+
+  const {values, handleChange, errors, isValid} = useFormWithValidation({},
+  {
+    name: ERROR_VALIDATION_USERNAME,
+    email: ERROR_VALIDATION_EMAIL,
+    password: ERROR_VALIDATION_PASSWORD,
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    handleRegister(values);
+  };
+
   return (
     <main className="Register App__main">
       <section className="Register__content">
-        <h1 className="Register__title">Добро пожаловать!</h1>
-        <form className="Register__form" name="RegisterForm" noValidate>
+        <form className="Register__form" name="RegisterForm"  onSubmit={handleSubmit} noValidate>
+          <h1 className="Register__title">Добро пожаловать!</h1>
           <MEFormInput
             type="text"
             name="name"
             title="Имя"
-            minLength="2"
-            maxLength="30"
-            required="true"
-            value={name}
-            onChangeValue={handleChangeName}
+            pattern={PATTERN_USERNAME}
+            required={true}
+            value={values["name"]}
+            onChangeValue={handleChange}
+            errorMessage={errors["name"]}
           />
           <MEFormInput
             type="text"
             name="email"
             title="E-mail"
-            minLength="2"
-            maxLength="30"
-            required="true"
-            value={email}
-            onChangeValue={handleChangeEmail}
+            required={true}
+            pattern={PATTERN_EMAIL}
+            value={values["email"]}
+            onChangeValue={handleChange}
+            errorMessage={errors["email"]}
           />
           <MEFormInput
             type="password"
             name="password"
             title="Пароль"
-            minLength="2"
-            maxLength="30"
-            required="true"
-            value={password}
-            onChangeValue={handleChangePassword}
-            hasError="true"
+            pattern={PATTERN_PASSWORD}
+            required={true}
+            value={values["password"]}
+            onChangeValue={handleChange}
+            errorMessage={errors["password"]}
           />
-          <MEFormError
-            hasError="true"
-            errorMessage="Что-то пошло не так..."
-          />
-        </form>
-        <div className="Register__controls">
-          <MEButton
-            className="MEButton_type_profile-submit"
-            type="submit"
-            title="Зарегистрироваться"
-          />
-          <div className="Register__prompt">
-            <span className="Register__prompt-title">
-              Уже зарегистрированы?
-            </span>
-            <MELink className="MELink_type_signing" to="/signin" title="Войти"/>
+          <div className="Register__controls">
+            <MEFormError
+              errorMessage={infoMessage}
+              className="MEFormError_type_main"
+            />
+            <MEButton
+              className={clsx('MEButton_type_profile-submit', !isValid ? 'MEButton_disabled' : '')}
+              disabled={!isValid}
+              type="submit"
+              title="Зарегистрироваться"
+            />
+            <div className="Register__prompt">
+              <span className="Register__prompt-title">
+                Уже зарегистрированы?
+              </span>
+              <MELink className="MELink_type_signing" to="/signin" title="Войти"/>
+            </div>
           </div>
-        </div>
+        </form>
       </section>
     </main>
   );

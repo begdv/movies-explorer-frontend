@@ -40,16 +40,23 @@
 }
 
 .MEPreloader {
-  display: none;
-  align-items: center;
+  display: flex;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
   height: 100%;
-  z-index: 10;
+  width: 100%;
+  visibility: hidden;
+  transition: visibility 0s 0.5s, opacity 0.5s linear;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
 
 .MEPreloader_show {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 
 .MEPreloader__container {

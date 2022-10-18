@@ -7,13 +7,16 @@ function Popup(props) {
     onClose: handleClosePopupClick,
     popupClassName,
     popupContainerClassName,
+    popupButtonClassName,
   } = props;
+
   const popupOpened = (isOpen) ? 'Popup_opened' : '';
+
   return (
     <div className={clsx('Popup', popupClassName, popupOpened)}>
       <div className={clsx('Popup__container', popupContainerClassName)}>
       <button
-          className="Popup__button-close"
+          className={clsx('Popup__button-close', popupButtonClassName)}
           type="button"
           onClick={handleClosePopupClick}
         >

@@ -3,10 +3,18 @@ import React from 'react';
 import './MEFilterSwitch.css';
 
 function MEFilterSwitch(props) {
-  const [checked, setChecked] = React.useState(true);
-  function handleChange() {
-		setChecked(!checked);
-	}
+  const {
+    switchValue,
+    onSwitchChange: handleSwitchChange,
+  } = props;
+
+  const [checked, setChecked] = React.useState(switchValue);
+
+  const handleChange = (e) => {
+		setChecked(e.target.checked);
+    handleSwitchChange(e.target.checked)
+	};
+
   return (
     <label className="MEFilterSwitch">
       <input
