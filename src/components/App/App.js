@@ -286,6 +286,11 @@ function App() {
   };
 
   const handleNavigation = () => {
+    alert('handleNavigation');
+    ClearDataOnNavigation();
+  }
+
+  const ClearDataOnNavigation = () => {
     setInfoMessage('');
     SetIsEditProfile(false);
     setFilterSavedMovie('');
@@ -295,9 +300,13 @@ function App() {
     setIsMenuPopupOpen(true);
   };
 
-  const closePopups = () => {
-    setIsMenuPopupOpen(false);
+  const closeInfoPopup = () => {
     setIsInfoPopupOpen(false);
+  };
+
+  const closeMenuPopup = () => {
+    ClearDataOnNavigation();
+    setIsMenuPopupOpen(false);
   };
 
   return (
@@ -428,13 +437,13 @@ function App() {
         </Routes>}
         <MenuPopup
           isOpen={isMenuPopupOpen}
-          onClose={closePopups}
+          onClose={closeMenuPopup}
         />
         <InfoPopup
           isOpen={isInfoPopupOpen}
           typeInfo={typeInfo}
           infoMessage={infoMessage}
-          onClose={closePopups}
+          onClose={closeInfoPopup}
         />
         <MEPreloader isShow={isLoading}/>
       </CurrentUserContext.Provider>
